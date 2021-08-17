@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useContext,createContext } from "react"
+import { getProducts } from "../utils/network"
 
 const ItemContext = createContext()
 export function useItem(){
@@ -26,16 +27,24 @@ export function ItemContextProvider({children}){
 
     useEffect(() => {
         setLoading(true)
-        fetch('https://api.onimamzad.com/api/frontEnd/products')
-        .then(res => res.json())
+        getProducts()
         .then(data => {
+            console.log(data)
             setProducts(data)
             setAllProducts(data)
             setLoading(false)
-        }).catch(e => {
-            setLoading(false)
-            alert(e.message)
         })
+        
+        // fetch('https://api.onimamzad.com/api/frontEnd/products')
+        // .then(res => res.json())
+        // .then(data => {
+        //     setProducts(data)
+        //     setAllProducts(data)
+        //     setLoading(false)
+        // }).catch(e => {
+        //     setLoading(false)
+        //     alert(e.message)
+        // })
     },[productChange])
 
     useEffect(() => {

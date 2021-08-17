@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { BiPlus } from "react-icons/bi";
+import { base_url } from '../../utils/network';
 import Loading from '../Loading/Loading';
 import AddAddressModal from './AddAddressModal';
 import AddressItem from './AddressItem';
@@ -36,8 +37,10 @@ const AddressSection = ({register,errors, customer}) => {
             const address = {title, desc}
             
             setLoading(true)
-            const user = JSON.parse(localStorage.getItem('user'))
-            fetch('https://api.onimamzad.com/api/frontEnd/inputAddress', {
+            const user = JSON.parse(localStorage.getItem('user')) 
+            
+            
+            fetch(base_url+'/api/frontEnd/inputAddress', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
