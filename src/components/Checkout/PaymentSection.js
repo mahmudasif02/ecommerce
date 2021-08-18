@@ -62,7 +62,7 @@ const PaymentSection = ({register,errors, disable}) => {
                     </label>
                 </div>
             </div>
-            {errors.paymentMethod?.category === 'required' && <span className="text-danger">Payment method is required</span>}
+            {errors.paymentMethod?.type === 'required' && <span className="text-danger">Payment method is required</span>}
             {
                 showCard &&
                 <CardPayment></CardPayment>

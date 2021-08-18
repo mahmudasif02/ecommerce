@@ -24,10 +24,12 @@ const Products = ({changeCategory, selectedCategory, subCategory}) => {
   useEffect(() => {
     if(selectedCategory){
       setLoading(true)
-      const result = getProducts(selectedCategory, subCategory)
-      setLoading(false)
-      setProductArray(result)
-      console.log(result)
+      getProducts(selectedCategory, subCategory)
+      .then(result => {
+        setLoading(false)
+        setProductArray(result)
+      })
+      
       // fetch('https://api.onimamzad.com/api/frontEnd/products?categoryId='+selectedCategory+'&subCategoryId='+subCategory)
       // .then(res => res.json())
       // .then(result =>{

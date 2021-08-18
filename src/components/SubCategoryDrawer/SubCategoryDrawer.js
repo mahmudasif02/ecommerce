@@ -22,9 +22,9 @@ const SubCategoryDrawer = ({filterWithCategory, setSubCategory, subCategoryList,
                         <AiOutlineCloseCircle onClick={handleSubCategoryDrawerClose} size={30} />
                     </div>
                     {
-                        subCategoryList.map(item => {
+                        subCategoryList.map((item, index) => {
                             return (
-                                <div className="col-lg-2 subCategory-item mt-3">
+                                <div key={index} className="col-lg-2 subCategory-item mt-3">
                                     <div className="bg-white p-3 text-center hover-pointer" onClick={()=>handleClick(item.id)}>
                                         {item.name}
                                     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useContext,createContext } from "react"
-import { getProducts } from "../utils/network"
+import { getCategories, getProducts } from "../utils/network"
 
 const ItemContext = createContext()
 export function useItem(){
@@ -29,7 +29,6 @@ export function ItemContextProvider({children}){
         setLoading(true)
         getProducts()
         .then(data => {
-            console.log(data)
             setProducts(data)
             setAllProducts(data)
             setLoading(false)
@@ -49,32 +48,38 @@ export function ItemContextProvider({children}){
 
     useEffect(() => {
         setCategoryLoading(true)
-        fetch('https://api.onimamzad.com/api/frontEnd/categories')
-        .then(res => res.json())
+        getCategories()
         .then(data => {
             setAllCategories(data)
             setCategories(data)
             setCategoryLoading(false)
         })
-        .catch(e => {
-            setCategoryLoading(false)
-            alert(e.message)
-        })
+        // fetch('https://api.onimamzad.com/api/frontEnd/categories')
+        // .then(res => res.json())
+        // .then(data => {
+        //     setAllCategories(data)
+        //     setCategories(data)
+        //     setCategoryLoading(false)
+        // })
+        // .catch(e => {
+        //     setCategoryLoading(false)
+        //     alert(e.message)
+        // })
     },[categoryChange])
 
-    useEffect(() => {
-        setCouponLoading(true)
-        fetch('https://pickbazar-clone.herokuapp.com/coupons')
-        .then(res => res.json())
-        .then(data => {
-            setAllcoupons(data)
-            setCoupons(data)
-            setCouponLoading(false)
-        }).catch(e => {
-            setCouponLoading(false)
-            alert(e.message)
-        })
-    },[couponChange])
+    // useEffect(() => {
+    //     setCouponLoading(true)
+    //     fetch('https://pickbazar-clone.herokuapp.com/coupons')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setAllcoupons(data)
+    //         setCoupons(data)
+    //         setCouponLoading(false)
+    //     }).catch(e => {
+    //         setCouponLoading(false)
+    //         alert(e.message)
+    //     })
+    // },[couponChange])
 
     const value = {
         loading, setLoading, allproducts, products, setProducts, productChange, setProductChange, categoryChange, setCategoryChange, allcategories, categories, setCategories, categoryLoading, setCategoryLoading, couponLoading, setCouponLoading, allcoupons, coupons, setCoupons, setCouponChange, couponChange
