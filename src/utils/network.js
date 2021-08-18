@@ -13,6 +13,7 @@ export const updateNumber="/api/frontEnd/updateContact"
 export const inputContactNumber="/api/frontEnd/inputContactNumber"
 export const deleteNumber="/api/frontEnd/deleteContact"
 export const addOrderApi="/api/frontEnd/addOrder"
+export const getOrderApi="/api/frontEnd/orders"
 
 export const getProducts = (selectedCategory="", subCategory="") => {
     return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory)
@@ -209,6 +210,21 @@ export const addOrder = (data, token) => {
             authorization: token
         },
         body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const getUserOrder = (token) => {
+    return fetch(base_url+addOrderApi,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            authorization: token
+        }
     })
     .then(res => res.json())
     .then(async result => {
