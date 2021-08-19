@@ -13,7 +13,7 @@ export const updateNumber="/api/frontEnd/updateContact"
 export const inputContactNumber="/api/frontEnd/inputContactNumber"
 export const deleteNumber="/api/frontEnd/deleteContact"
 export const addOrderApi="/api/frontEnd/addOrder"
-export const getOrderApi="/api/frontEnd/orders"
+export const getUserOrderApi="/api/frontEnd/orders"
 
 export const getProducts = (selectedCategory="", subCategory="") => {
     return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory)
@@ -207,7 +207,7 @@ export const addOrder = (data, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            authorization: token
+            Authorization: token
         },
         body: JSON.stringify(data)
     })
@@ -218,12 +218,11 @@ export const addOrder = (data, token) => {
     .catch(e => alert(e.message))
 }
 
-export const getUserOrder = (token) => {
-    return fetch(base_url+addOrderApi,{
-        method: 'GET',
+export const getUserOrders = (token) => {
+    return fetch(base_url+getUserOrderApi,{
         headers: {
             'Content-Type': 'application/json',
-            authorization: token
+            Authorization: token
         }
     })
     .then(res => res.json())

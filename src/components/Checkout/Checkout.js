@@ -151,6 +151,8 @@ const Checkout = () => {
             }
         })
         // data.status = "pending"
+        console.log(data)
+
         setOrderLoading(true)
         const user = JSON.parse(localStorage.getItem('user')) 
         addOrder(data, user.token)
@@ -165,6 +167,8 @@ const Checkout = () => {
                 state: {passData}
             })
         })
+
+
         // updateProduct(items)
         // updateCustomerData()
         // fetch('https://pickbazar-clone.herokuapp.com/addOrder',{
