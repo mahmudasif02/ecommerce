@@ -102,73 +102,73 @@ const AdminProducts = () => {
     const [categoryFilter, setCategoryFilter] = useState("")
     const [priceFilter, setPriceFilter] = useState("")
 
-    const [categoryFilterState, setCategoryFilterState] = useState("")
-    const productFilter = async (category, price, query) => {
-        setCategoryFilterState(category)
-        if(search && query){
-            let newProductList = await handleSearchWithValue(search)
-            if(category === "all" || category === ""){
-                newProductList = priceFilterFunc(newProductList, price)
-                setProducts(newProductList)
-            }
-            else{
-                newProductList = newProductList.filter(pd => pd.category === category)
-                newProductList = priceFilterFunc(newProductList, price)
-                setProducts(newProductList)
-            }
-        }
-        else if(category === "all" || category === ""){
-            let newProductList = allproducts.slice()
-            newProductList = priceFilterFunc(newProductList, price)
-            setProducts(newProductList)
-        }
-        else{
-            let newProductList = allproducts.filter(pd => pd.category === category)
-            newProductList = priceFilterFunc(newProductList, price)
-            setProducts(newProductList)
-        }
-        resetSelection()
-        forceUpdate()
-    }
+    // const [categoryFilterState, setCategoryFilterState] = useState("")
+    // const productFilter = async (category, price, query) => {
+    //     setCategoryFilterState(category)
+    //     if(search && query){
+    //         let newProductList = await handleSearchWithValue(search)
+    //         if(category === "all" || category === ""){
+    //             newProductList = priceFilterFunc(newProductList, price)
+    //             setProducts(newProductList)
+    //         }
+    //         else{
+    //             newProductList = newProductList.filter(pd => pd.category === category)
+    //             newProductList = priceFilterFunc(newProductList, price)
+    //             setProducts(newProductList)
+    //         }
+    //     }
+    //     else if(category === "all" || category === ""){
+    //         let newProductList = allproducts.slice()
+    //         newProductList = priceFilterFunc(newProductList, price)
+    //         setProducts(newProductList)
+    //     }
+    //     else{
+    //         let newProductList = allproducts.filter(pd => pd.category === category)
+    //         newProductList = priceFilterFunc(newProductList, price)
+    //         setProducts(newProductList)
+    //     }
+    //     resetSelection()
+    //     forceUpdate()
+    // }
 
-    const [priceFilterState, setPriceFilterState] = useState("")
-    const priceFilterFunc = (pd, price) => {
-        const newProductList = pd
-        setPriceFilterState(price)
-        if(price === 'highest to lowest'){
-            newProductList.sort((a, b) => {
-                if(a.sale > 0 && b.sale > 0){
-                    return a.sale > b.sale ? -1 : 1
-                }
-                else if(a.sale > 0 && b.sale === 0){
-                    return a.sale > b.price ? -1 : 1
-                }
-                else if(a.sale === 0 && b.sale > 0){
-                    return a.price > b.sale ? -1 : 1
-                }
-                else{
-                    return a.price > b.price ? -1 : 1
-                }
-            })
-        }
-        else if(price === "lowest to highest"){
-            newProductList.sort((a, b) => {
-                if(a.sale > 0 && b.sale > 0){
-                    return a.sale > b.sale ? 1 : -1
-                }
-                else if(a.sale > 0 && b.sale === 0){
-                    return a.sale > b.price ? 1 : -1
-                }
-                else if(a.sale === 0 && b.sale > 0){
-                    return a.price > b.sale ? 1 : -1
-                }
-                else{
-                    return a.price > b.price ? 1 : -1
-                }
-            })
-        } 
-        return newProductList
-    }
+    // const [priceFilterState, setPriceFilterState] = useState("")
+    // const priceFilterFunc = (pd, price) => {
+    //     const newProductList = pd
+    //     setPriceFilterState(price)
+    //     if(price === 'highest to lowest'){
+    //         newProductList.sort((a, b) => {
+    //             if(a.sale > 0 && b.sale > 0){
+    //                 return a.sale > b.sale ? -1 : 1
+    //             }
+    //             else if(a.sale > 0 && b.sale === 0){
+    //                 return a.sale > b.price ? -1 : 1
+    //             }
+    //             else if(a.sale === 0 && b.sale > 0){
+    //                 return a.price > b.sale ? -1 : 1
+    //             }
+    //             else{
+    //                 return a.price > b.price ? -1 : 1
+    //             }
+    //         })
+    //     }
+    //     else if(price === "lowest to highest"){
+    //         newProductList.sort((a, b) => {
+    //             if(a.sale > 0 && b.sale > 0){
+    //                 return a.sale > b.sale ? 1 : -1
+    //             }
+    //             else if(a.sale > 0 && b.sale === 0){
+    //                 return a.sale > b.price ? 1 : -1
+    //             }
+    //             else if(a.sale === 0 && b.sale > 0){
+    //                 return a.price > b.sale ? 1 : -1
+    //             }
+    //             else{
+    //                 return a.price > b.price ? 1 : -1
+    //             }
+    //         })
+    //     } 
+    //     return newProductList
+    // }
 
     const handleSearchWithValue = (searchValue) => {
         let apiURL = 'https://pickbazar-clone.herokuapp.com/products/'+searchValue
@@ -178,9 +178,9 @@ const AdminProducts = () => {
         .then(result =>{
             setSearchLoading(false)
             let newList = result
-            if(priceFilterState){
-                newList = priceFilterFunc(result, priceFilterState, true)
-            }
+            // if(priceFilterState){
+            //     newList = priceFilterFunc(result, priceFilterState, true)
+            // }
             return newList
         })
     }
@@ -191,12 +191,12 @@ const AdminProducts = () => {
         let apiURL = ""
         if(e.target.value === ""){
             setSearch(null)
-            if(categoryFilterState !== "" || priceFilterState !== ""){
-                productFilter(categoryFilterState, priceFilterState, false)
-            }
-            else{
+            // if(categoryFilterState !== "" || priceFilterState !== ""){
+            //     productFilter(categoryFilterState, priceFilterState, false)
+            // }
+            // else{
                 setProducts(allproducts.slice())
-            }
+            // }
             resetSelection()
         }
         else if(e.which === 13){
@@ -210,8 +210,8 @@ const AdminProducts = () => {
                 let newList = result
                 setCategoryFilter("")
                 setPriceFilter("")
-                setCategoryFilterState("")
-                setPriceFilterState("")
+                // setCategoryFilterState("")
+                // setPriceFilterState("")
                 setProducts(newList)
             })
             resetSelection()
@@ -219,23 +219,25 @@ const AdminProducts = () => {
     }
     
     useEffect(() =>{
-        setCategoryFilterState("")
-        setPriceFilterState("")
+        // setCategoryFilterState("")
+        // setPriceFilterState("")
         setProducts(allproducts)
     },[allproducts, setProducts])
-
+    
     return (
         <AdminLayout >
             <div className="admin-products container-fluid">
                 <div className="row">
                     <div className="admin-products-header col-lg-12 mt-5">
                         <AdminProductHeader 
-                            productFilter={productFilter}
+                            // productFilter={productFilter}
                             handleSearch={handleSearch}
                             categoryFilter={categoryFilter}
                             setCategoryFilter={setCategoryFilter}
                             priceFilter={priceFilter}
+                            setProducts={setProducts}
                             setPriceFilter={setPriceFilter}
+                            forceUpdate={forceUpdate}
                         >
                         </AdminProductHeader>
                     </div>

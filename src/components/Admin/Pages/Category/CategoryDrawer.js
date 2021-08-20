@@ -6,6 +6,7 @@ import './Category.css'
 import {useDropzone} from 'react-dropzone';
 import { useForm } from "react-hook-form";
 import { useItem } from '../../../../contexts/ItemContext';
+import { addCategory, updateCategory } from '../../../../utils/network';
 
 const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClose}) => {
 
@@ -27,56 +28,87 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
         maxFiles:1,
     });
 
+    const {categories} = useItem()
+
     const saveToDatabase = (data) =>{
-        let apiURL = ""
+        console.log(data)
+        // const formData = new FormData();
+        // formData.append("name", data.name);
+        // formData.append("parent", data.parent);
+        // formData.append("file", data.file);
+        
+        const user = JSON.parse(localStorage.getItem('user')) 
         if(!category){
-            apiURL = 'https://pickbazar-clone.herokuapp.com/addCategory'
+            addCategory(data, user.token)
+            .then(result => {
+                console.log(result)
+                setCategoryLoading(false)
+                closeDrawer()
+            })
         }
         else{
-            apiURL = 'https://pickbazar-clone.herokuapp.com/updateCategory/'+category.id
+            updateCategory(data, user.token, category.id)
+            .then(result => {
+                console.log(result)
+                setCategoryLoading(false)
+                closeDrawer()
+            })
         }
-        fetch(apiURL, {
-            method: category? 'PUT' : 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data){
-                reset()
-                setCategoryChange(true)
-                setCategoryChange(false)
-            }
-            setCategoryLoading(false)
-        })
-        .catch(error => {
-            setCategoryLoading(false)
-            alert(error.message)
-        })
+
+        // let apiURL = ""
+        // if(!category){
+        //     apiURL = 'https://pickbazar-clone.herokuapp.com/addCategory'
+        // }
+        // else{
+        //     apiURL = 'https://pickbazar-clone.herokuapp.com/updateCategory/'+category.id
+        // }
+        // fetch(apiURL, {
+        //     method: category? 'PUT' : 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(data)
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     if(data){
+        //         reset()
+        //         setCategoryChange(true)
+        //         setCategoryChange(false)
+        //     }
+        //     setCategoryLoading(false)
+        // })
+        // .catch(error => {
+        //     setCategoryLoading(false)
+        //     alert(error.message)
+        // })
     }
 
     const onSubmit = data => {
         setCategoryLoading(true)
+        // if(files.length > 0){
+        //     const imageData = new FormData();
+        //     imageData.set('key', '0c9c52f3c2c70e376333024c7dd177e2');
+        //     imageData.append('image', files[0]);
+        //     fetch('https://api.imgbb.com/1/upload', {
+        //         method: 'POST',
+        //         body: imageData
+        //     })
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         data.img = result.data.display_url
+        //         saveToDatabase(data)
+        //     })
+        //     .catch(error => {
+        //         alert(error)
+        //     })
+        //     closeDrawer()
+        // } 
         if(files.length > 0){
-            const imageData = new FormData();
-            imageData.set('key', '0c9c52f3c2c70e376333024c7dd177e2');
-            imageData.append('image', files[0]);
-            fetch('https://api.imgbb.com/1/upload', {
-                method: 'POST',
-                body: imageData
-            })
-            .then(response => response.json())
-            .then(result => {
-                data.img = result.data.display_url
-                saveToDatabase(data)
-            })
-            .catch(error => {
-                alert(error)
-            })
-            closeDrawer()
-        } 
+            data.file = files[0]
+            data.file.file= files[0].path
+            saveToDatabase(data)
+        }
         else if(category?.img){
             saveToDatabase(data)
             closeDrawer()
@@ -169,11 +201,14 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
                                 </div> */}
                                 <div className="form-group">
                                     <label htmlFor="type">Parent</label>
-                                    <select type="text" className="form-control" {...register("type")} name="type" id="type" defaultValue={category?category.type:""} aria-describedby="type" required>
-                                        <option value="Grocery">Grocery</option>
-                                        <option value="Make Up">Make Up</option>
-                                        <option value="Home">Home</option>
-                                        <option value="Meat">Meat</option>
+                                    <select type="text" className="form-control" {...register("parent")} name="parent" id="parent" defaultValue={category?category.parent:""} aria-describedby="parent" >
+                                    <option value=""></option>
+                                        {
+                                            categories.map((item,index) => {
+                                                if(!item.parent)
+                                                    return <option key={index} value="Grocery">{item.name}</option>
+                                            })
+                                        }
                                     </select>
                                 </div>
                             </div>

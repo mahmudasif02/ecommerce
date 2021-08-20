@@ -29,7 +29,6 @@ export function ItemContextProvider({children}){
         setLoading(true)
         getProducts()
         .then(data => {
-            console.log(data)
             setProducts(data)
             setAllProducts(data)
             setLoading(false)

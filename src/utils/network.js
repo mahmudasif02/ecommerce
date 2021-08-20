@@ -4,19 +4,27 @@ export const inputAddress="/api/frontEnd/inputAddress"
 export const delveryAddress="/api/frontEnd/deliveryAddress"
 export const updateAddress="/api/frontEnd/updateAddress"
 export const deleteAddress="/api/frontEnd/deleteAddress"
+
 export const userLogin="/api/frontEnd/userLogin"
-export const allProducstApi="/api/frontEnd/products"
 export const userRegister="/api/frontEnd/userRegister"
+
+export const allProducstApi="/api/frontEnd/products"
+
 export const allCategoriesApi="/api/frontEnd/categories"
+export const addCategoryApi="/api/admin/addCategory"
+export const updateCategoryApi="/api/admin/updateCategory/"
+export const deleteCategoryApi="/api/admin/deleteCategory/"
+
 export const contactNumber="/api/frontEnd/contactNumbers"
 export const updateNumber="/api/frontEnd/updateContact"
 export const inputContactNumber="/api/frontEnd/inputContactNumber"
 export const deleteNumber="/api/frontEnd/deleteContact"
+
 export const addOrderApi="/api/frontEnd/addOrder"
 export const getUserOrderApi="/api/frontEnd/orders"
 
-export const getProducts = (selectedCategory="", subCategory="") => {
-    return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory)
+export const getProducts = (selectedCategory="", subCategory="", priceFilter="") => {
+    return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory+'&priceFilter='+priceFilter)
     .then(res => res.json())
     .then(result =>{
         return result
@@ -130,6 +138,59 @@ export const getCategories = () =>{
     .then(res => res.json())
     .then(data => {
         return data
+    })
+    .catch(e => {
+        alert(e.message)
+    })
+}
+
+export const addCategory = (data, token) => {
+    return fetch(base_url + addCategoryApi, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        return result
+    })
+    .catch(e => {
+        alert(e.message)
+    })
+}
+
+export const updateCategory = (data, token, id) => {
+    return fetch(base_url + updateCategoryApi+id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        return result
+    })
+    .catch(e => {
+        alert(e.message)
+    })
+}
+
+export const deleteCategory = (token, id) => {
+    return fetch(base_url + deleteCategoryApi+id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        }
+    })
+    .then(res => res.json())
+    .then(result => {
+        return result
     })
     .catch(e => {
         alert(e.message)

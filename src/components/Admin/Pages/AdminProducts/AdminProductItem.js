@@ -69,7 +69,7 @@ const AdminProductItem = ({product, products, deselectAll, handleSingleDelete, i
                         </>
                     }
                     {
-                        product?.discount === 0 &&
+                        (product.sale == null || product.sale === 0) &&
                         <h5 className="card-title">${product.price}</h5>
                     }
                     </div>
