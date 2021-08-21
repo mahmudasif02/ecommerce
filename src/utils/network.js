@@ -148,10 +148,9 @@ export const addCategory = (data, token) => {
     return fetch(base_url + addCategoryApi, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: token
         },
-        body: JSON.stringify(data)
+        body: data
     })
     .then(res => res.json())
     .then(result => {
@@ -164,12 +163,11 @@ export const addCategory = (data, token) => {
 
 export const updateCategory = (data, token, id) => {
     return fetch(base_url + updateCategoryApi+id, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
             Authorization: token
         },
-        body: JSON.stringify(data)
+        body: data
     })
     .then(res => res.json())
     .then(result => {

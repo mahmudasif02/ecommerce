@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { useItem } from '../../../../contexts/ItemContext';
 import { addCategory, updateCategory } from '../../../../utils/network';
 
-const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClose}) => {
+const CategoryDrawer = ({category, parent, isCategoryDrawerOpen, handleCategoryDrawerClose}) => {
 
     const { register, handleSubmit, reset } = useForm();
     const {setCategoryLoading, setCategoryChange} = useItem();
@@ -31,28 +31,32 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
     const {categories} = useItem()
 
     const saveToDatabase = (data) =>{
-        console.log(data)
-        // const formData = new FormData();
-        // formData.append("name", data.name);
-        // formData.append("parent", data.parent);
-        // formData.append("file", data.file);
-        
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("parent", data.parent);
+        if(data.file){
+            formData.append("file", data.file);
+        }
         const user = JSON.parse(localStorage.getItem('user')) 
         if(!category){
-            addCategory(data, user.token)
+            addCategory(formData, user.token)
             .then(result => {
-                console.log(result)
+                setCategoryChange(true)
+                setCategoryChange(false)
                 setCategoryLoading(false)
                 closeDrawer()
             })
         }
         else{
-            updateCategory(data, user.token, category.id)
+            updateCategory(formData, user.token, category.id)
             .then(result => {
                 console.log(result)
+                setCategoryChange(true)
+                setCategoryChange(false)
                 setCategoryLoading(false)
                 closeDrawer()
             })
+            .catch(e => console.log(e.message))
         }
 
         // let apiURL = ""
@@ -106,7 +110,6 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
         // } 
         if(files.length > 0){
             data.file = files[0]
-            data.file.file= files[0].path
             saveToDatabase(data)
         }
         else if(category?.img){
@@ -135,7 +138,6 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
           </li>
         ) 
     });
-    
     
     return (
         <div>
@@ -201,12 +203,11 @@ const CategoryDrawer = ({category, isCategoryDrawerOpen, handleCategoryDrawerClo
                                 </div> */}
                                 <div className="form-group">
                                     <label htmlFor="type">Parent</label>
-                                    <select type="text" className="form-control" {...register("parent")} name="parent" id="parent" defaultValue={category?category.parent:""} aria-describedby="parent" >
+                                    <select type="text" className="form-control" {...register("parent")} name="parent" id="parent" defaultValue={parent? parent.id:""} aria-describedby="parent" >
                                     <option value=""></option>
                                         {
                                             categories.map((item,index) => {
-                                                if(!item.parent)
-                                                    return <option key={index} value="Grocery">{item.name}</option>
+                                                return <option key={index} value={item.id}>{item.name}</option>
                                             })
                                         }
                                     </select>
