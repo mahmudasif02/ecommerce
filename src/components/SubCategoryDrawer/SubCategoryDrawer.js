@@ -1,5 +1,7 @@
 import { Drawer } from '@material-ui/core';
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const SubCategoryDrawer = ({filterWithCategory, setSubCategory, subCategoryList, isSubCategoryDrawerOpen, handleSubCategoryDrawerClose}) => {
@@ -9,10 +11,15 @@ const SubCategoryDrawer = ({filterWithCategory, setSubCategory, subCategoryList,
         filterWithCategory(subCategory)
     }
 
+    const [anchorOpen, setAnchorOpen] = useState(window.screen.width)
+    useEffect(() => {
+        setAnchorOpen(window.screen.width)
+    }, [window.screen.width])
+    
     return (
         <Drawer 
             className="sub-category-drawer drawer" 
-            anchor={"right"} 
+            anchor={anchorOpen > 768 ? "right" : "bottom"} 
             open={isSubCategoryDrawerOpen} 
             onClose={handleSubCategoryDrawerClose}
         > 

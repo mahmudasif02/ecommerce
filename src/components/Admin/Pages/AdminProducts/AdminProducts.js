@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Loading from '../../../Loading/Loading';
 import { useItem } from '../../../../contexts/ItemContext';
+import { deleteProducts } from '../../../../utils/network';
 
 export function useForceUpdate(){
     const [value, setValue] = useState(0); // integer state
@@ -19,7 +20,7 @@ const AdminProducts = () => {
     const [isAllChecked, setIsAllChecked] = useState(false)
     const [deselectAll, setDeselectAll] = useState(true);
     const [selected, setSelected] = useState([])
-
+    
     const handleBulkDelete = () => {
         setLoading(true)
         const selectedIds = selected.map(item => item.id) 
@@ -49,17 +50,39 @@ const AdminProducts = () => {
 
     const handleSingleDelete = (id) => {
         setLoading(true)
-        fetch(`https://pickbazar-clone.herokuapp.com/deleteProduct/${id}`,{
-            method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(data => {
-            setLoading(false)
-            if(data){
+        const data = {
+            "productIds": [
+                {
+                    "id":id
+                }
+            ]
+        }
+        
+        console.log(data)
+        const user = JSON.parse(localStorage.getItem('user')) 
+        deleteProducts(data, user.token)
+        .then(result => {
+            if(result.error){
+                alert(result.error)
+            }
+            else{
                 const newList = products.filter(pd => pd.id !== id)
                 setProducts(newList)
             }
+            setLoading(false)
         })
+
+        // fetch(`https://pickbazar-clone.herokuapp.com/deleteProduct/${id}`,{
+        //     method: 'DELETE'
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //     setLoading(false)
+        //     if(data){
+        //         const newList = products.filter(pd => pd.id !== id)
+        //         setProducts(newList)
+        //     }
+        // })
     }
 
     const handleAllChecked = () => {

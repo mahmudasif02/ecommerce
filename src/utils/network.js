@@ -9,6 +9,8 @@ export const userLogin="/api/frontEnd/userLogin"
 export const userRegister="/api/frontEnd/userRegister"
 
 export const allProducstApi="/api/frontEnd/products"
+export const addProductApi="/api/admin/addProduct"
+export const deleteProductsApi="/api/admin/deleteProducts"
 
 export const allCategoriesApi="/api/frontEnd/categories"
 export const addCategoryApi="/api/admin/addCategory"
@@ -23,11 +25,49 @@ export const deleteNumber="/api/frontEnd/deleteContact"
 export const addOrderApi="/api/frontEnd/addOrder"
 export const getUserOrderApi="/api/frontEnd/orders"
 
+export const inputCommentApi="/api/frontEnd/inputCustomerFeedback"
+export const getCommentApi="/api/frontEnd/getFeedbackList/"
+
 export const getProducts = (selectedCategory="", subCategory="", priceFilter="") => {
     return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory+'&priceFilter='+priceFilter)
     .then(res => res.json())
     .then(result =>{
         return result
+    })
+}
+
+export const addProduct = (data, token) => {
+    return fetch(base_url+addProductApi, {
+        method: 'POST',
+        headers: {
+            Authorization: token
+        },
+        body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+        return data
+    })
+    .catch(error => {
+        alert(error.message)
+    })
+}
+
+export const deleteProducts = (data, token) => {
+    return fetch(base_url+deleteProductsApi, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        return data
+    })
+    .catch(error => {
+        alert(error.message)
     })
 }
 
@@ -284,6 +324,31 @@ export const getUserOrders = (token) => {
             Authorization: token
         }
     })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const inputComment = (data, token) => {
+    return fetch(base_url+inputCommentApi,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const getComments = (productId) => {
+    return fetch(base_url+getCommentApi+productId)
     .then(res => res.json())
     .then(async result => {
         return result

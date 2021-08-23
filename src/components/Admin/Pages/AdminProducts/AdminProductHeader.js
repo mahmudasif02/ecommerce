@@ -4,7 +4,7 @@ import { getProducts } from '../../../../utils/network';
 
 const AdminProductHeader = ({forceUpdate,setProducts, productFilter, handleSearch, categoryFilter, setCategoryFilter, priceFilter, setPriceFilter}) => {
     const {categories} = useItem()
-    console.log(categories)
+    
     const handleCategory = (e) => {
         let filter = ""
         if(e.target.value === 'all'){
