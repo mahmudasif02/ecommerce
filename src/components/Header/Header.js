@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import logo from '../../img/logo.svg';
+// import logo from '../../img/logo.svg';
 import {AiOutlineSearch} from 'react-icons/ai';
 import './Header.css';
 import LoginModal from '../LoginModal/LoginModal';
@@ -12,6 +12,7 @@ import { AiOutlineAlignLeft } from "react-icons/ai";
 import UserDrawer from './UserDrawer';
 import userIcon from '../../img/user.png';
 import { useEffect } from 'react';
+import { useItem } from '../../contexts/ItemContext';
 
 const Header = ({changeCategory}) => {
 
@@ -81,6 +82,7 @@ const Header = ({changeCategory}) => {
         }
     }, [window.location])
     
+    const {logo} = useItem()
 
     return (
         <>
@@ -95,7 +97,7 @@ const Header = ({changeCategory}) => {
                                 onClick={()=>setUserDrawerOpen(true)}
                             />
                         </div>
-                        <Link className="navbar-brand d-flex align-items-center" to="/"><img src={logo} alt="" /></Link>
+                        <Link className="navbar-brand d-flex align-items-center" to="/"><img className="site-logo" src={logo} alt="" /></Link>
                     </div>
 
                     {

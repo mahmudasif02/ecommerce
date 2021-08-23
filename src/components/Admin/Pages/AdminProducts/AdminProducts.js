@@ -23,17 +23,23 @@ const AdminProducts = () => {
     
     const handleBulkDelete = () => {
         setLoading(true)
-        const selectedIds = selected.map(item => item.id) 
-        fetch(`https://pickbazar-clone.herokuapp.com/deleteBulkProduct/`,{
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(selectedIds)
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data){
+        const data = {
+            "productIds": []
+        }
+        selected.map(item => {
+            data.productIds.push({
+                "id":item.id
+            })
+        }) 
+        
+
+        const user = JSON.parse(localStorage.getItem('user')) 
+        deleteProducts(data, user.token)
+        .then(result => {
+            if(result.error){
+                alert(result.error)
+            }
+            else{
                 const newList = products.filter(item => {
                     let deleteItem = selected.find(item2 => item.id === item2.id)
                     return deleteItem? false: true
@@ -43,9 +49,30 @@ const AdminProducts = () => {
             resetSelection()
             setLoading(false)
         })
-        .catch(e => {
-            alert(e.message)
-        })
+
+
+        // fetch(`https://pickbazar-clone.herokuapp.com/deleteBulkProduct/`,{
+        //     method: 'DELETE',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(selectedIds)
+        // })
+        // .then(res => res.json())
+        // .then(data => {
+        //     if(data){
+        //         const newList = products.filter(item => {
+        //             let deleteItem = selected.find(item2 => item.id === item2.id)
+        //             return deleteItem? false: true
+        //         })
+        //         setProducts(newList)
+        //     }
+        //     resetSelection()
+        //     setLoading(false)
+        // })
+        // .catch(e => {
+        //     alert(e.message)
+        // })
     }
 
     const handleSingleDelete = (id) => {
@@ -58,7 +85,6 @@ const AdminProducts = () => {
             ]
         }
         
-        console.log(data)
         const user = JSON.parse(localStorage.getItem('user')) 
         deleteProducts(data, user.token)
         .then(result => {

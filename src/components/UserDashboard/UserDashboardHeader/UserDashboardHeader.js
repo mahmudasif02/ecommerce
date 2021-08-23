@@ -2,10 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
-import logo from '../../../img/logo.svg';
 import user from '../../../img/user.png';
 import UserDrawer from '../../Header/UserDrawer';
 import { AiOutlineAlignLeft } from "react-icons/ai";
+import { useItem } from '../../../contexts/ItemContext';
 
 const UserDashboardHeader = () => {
 
@@ -16,7 +16,7 @@ const UserDashboardHeader = () => {
         setUserDrawerOpen(false)
     }
     
-
+    const {logo} = useItem()
     return (
         <>
             <header className="bg-white user-profile-header">
@@ -30,7 +30,7 @@ const UserDashboardHeader = () => {
                                     onClick={()=>setUserDrawerOpen(true)}
                                 />
                             </div>
-                            <Link className="navbar-brand d-flex align-items-center" to="/"><img src={logo} alt="" /></Link>
+                            <Link className="navbar-brand d-flex align-items-center" to="/"><img className="site-logo" src={logo} alt="" /></Link>
                         </div>
                         <div className="dropdown user-icon hover-pointer ml-auto">
                             <img className="dropdown-toggle" src={loggedInUser?.photo? loggedInUser.photo: user} alt="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>

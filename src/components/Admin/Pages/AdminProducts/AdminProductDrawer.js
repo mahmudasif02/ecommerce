@@ -9,7 +9,7 @@ import { Multiselect } from 'multiselect-react-dropdown';
 // import categories from '../../../../data/categories';
 import tags from '../../../../data/tags';
 import { useItem } from '../../../../contexts/ItemContext';
-import { addProduct } from '../../../../utils/network';
+import { addProduct, updateProduct } from '../../../../utils/network';
 
 const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerOpen}) => {
 
@@ -47,7 +47,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
         handleProductDrawerClose();
     }
     
-    const saveToDatabase = (data) => {
+    const saveToDatabase = (data, productId) => {
         const {name, desc, unit, price, discount_percentage, sale_price, category_id, sub_category_id, quantity, tags, images} = data
         const formData = new FormData();
         
@@ -63,24 +63,38 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
         // images.map(image => formData.append('images',image))
         // formData.append('tags[]',tags)
 
-        Array.from(tags).forEach(tag => {
-            console.log(tag)
-            formData.append("tags[]", tag);
-        });
+        if(tags){
+            Array.from(tags).forEach(tag => {
+                formData.append("tags[]", tag);
+            });
+        }
 
-        Array.from(images).forEach(image => {
-            console.log(image)
-            formData.append("images[]", image);
-        });
+        if(images){
+            Array.from(images).forEach(image => {
+                formData.append("images[]", image);
+            });
+        }
         
-        
+        console.log(images)
         const user = JSON.parse(localStorage.getItem('user')) 
-        addProduct(formData, user.token)
-        .then(result => {
-            setProductChange(true)
-            setProductChange(false)
-            setLoading(false)
-        })
+        if(!product){
+            addProduct(formData, user.token)
+            .then(result => {
+                reset()
+                setProductChange(true)
+                setProductChange(false)
+                setLoading(false)
+            })
+        }
+        else{
+            updateProduct(formData, productId, user.token)
+            .then(result => {
+                reset()
+                setProductChange(true)
+                setProductChange(false)
+                setLoading(false)
+            })
+        }
 
 
         // let apiURL = ""
@@ -140,12 +154,12 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
             // );
 
             data.images = files
-            saveToDatabase(data)
+            saveToDatabase(data, product?.id)
             
             closeDrawer()
         } 
         else if(product?.img){
-            saveToDatabase(data)
+            saveToDatabase( data, product?.id)
             closeDrawer()
         }
         else{
@@ -170,6 +184,8 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
         const category = categories.find(item => Number(item.id) === categoryId)
         setSubCategories(category.subCategory)
     }
+
+    console.log(product)
     
     return (
         <div>
@@ -292,7 +308,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                             step="any" 
                                             aria-describedby="sale_price"
                                             defaultValue={product?.sale} 
-                                            required
+                                            
                                         />
                                     </div>
                                     <div className="form-group">
@@ -306,7 +322,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                             step="any" 
                                             aria-describedby="discount_percentage" 
                                             defaultValue={product?.discount} 
-                                            required
+                                            
                                         />
                                     </div>
                                     <div className="form-group">
@@ -332,7 +348,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                             id="category_id" 
                                             aria-describedby="category_id" 
                                             onChange={handleCategoryChange}
-                                            // defaultValue={product?.category?.id} 
+                                            defaultValue={product?.category_id} 
                                             required
                                         >
                                             {
@@ -348,7 +364,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                             name="sub_category_id" 
                                             id="sub_category_id" 
                                             aria-describedby="sub_category_id" 
-                                            defaultValue={product?.sub_category_id } 
+                                            defaultValue={product?.sub_category_id ? product.sub_category_id : "" } 
                                         >
                                             <option value="" disabled></option>
                                             {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AdminProductDrawer from './AdminProductDrawer';
 
 const AdminProductItem = ({product, products, deselectAll, handleSingleDelete, isAllChecked, selected, setSelected}) => {
-
+    // console.log(product)
     const [isProductDrawerOpen, setProductDrawerOpen] = useState(false);
     
     const handleProductDrawerOpen = () => {

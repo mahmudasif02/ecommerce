@@ -41,6 +41,7 @@ const CategoryDrawer = ({category, parent, isCategoryDrawerOpen, handleCategoryD
         if(!category){
             addCategory(formData, user.token)
             .then(result => {
+                reset()
                 setCategoryChange(true)
                 setCategoryChange(false)
                 setCategoryLoading(false)
@@ -50,7 +51,7 @@ const CategoryDrawer = ({category, parent, isCategoryDrawerOpen, handleCategoryD
         else{
             updateCategory(formData, user.token, category.id)
             .then(result => {
-                console.log(result)
+                reset()
                 setCategoryChange(true)
                 setCategoryChange(false)
                 setCategoryLoading(false)

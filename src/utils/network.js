@@ -11,6 +11,7 @@ export const userRegister="/api/frontEnd/userRegister"
 export const allProducstApi="/api/frontEnd/products"
 export const addProductApi="/api/admin/addProduct"
 export const deleteProductsApi="/api/admin/deleteProducts"
+export const updateProductApi="/api/admin/updateProduct/"
 
 export const allCategoriesApi="/api/frontEnd/categories"
 export const addCategoryApi="/api/admin/addCategory"
@@ -27,6 +28,14 @@ export const getUserOrderApi="/api/frontEnd/orders"
 
 export const inputCommentApi="/api/frontEnd/inputCustomerFeedback"
 export const getCommentApi="/api/frontEnd/getFeedbackList/"
+
+export const addLogoApi="/api/admin/addLogo"
+export const getLogoApi="/api/admin/getLogo"
+
+export const getSlidersApi="/api/frontEnd/homeSliders"
+export const deleteSliderApi="/api/admin/deleteSlider/"
+export const addSliderApi="/api/admin/addSlider"
+
 
 export const getProducts = (selectedCategory="", subCategory="", priceFilter="") => {
     return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory+'&priceFilter='+priceFilter)
@@ -61,6 +70,23 @@ export const deleteProducts = (data, token) => {
             Authorization: token
         },
         body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        return data
+    })
+    .catch(error => {
+        alert(error.message)
+    })
+}
+
+export const updateProduct = (data, id, token) => {
+    return fetch(base_url+updateProductApi+id, {
+        method: 'POST',
+        headers: {
+            Authorization: token
+        },
+        body: data
     })
     .then(response => response.json())
     .then(data => {
@@ -349,6 +375,70 @@ export const inputComment = (data, token) => {
 
 export const getComments = (productId) => {
     return fetch(base_url+getCommentApi+productId)
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const addLogo = (data, token) => {
+    console.log(data)
+    return fetch(base_url+addLogoApi,{
+        method: 'POST',
+        headers: {
+            Authorization: token
+        },
+        body: data
+    })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const getLogo = () => {
+    return fetch(base_url+getLogoApi)
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const addSlider = (data, token) => {
+    console.log(data)
+    return fetch(base_url+addSliderApi,{
+        method: 'POST',
+        headers: {
+            Authorization: token
+        },
+        body: data
+    })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const getSlider = () => {
+    return fetch(base_url+getSlidersApi)
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const deleteSlider = (id,token) => {
+    return fetch(base_url+deleteSliderApi+id,{
+        method: 'DELETE',
+        headers: {
+            Authorization: token
+        }
+    })
     .then(res => res.json())
     .then(async result => {
         return result
