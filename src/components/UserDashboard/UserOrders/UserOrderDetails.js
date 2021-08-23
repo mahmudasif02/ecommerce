@@ -76,7 +76,7 @@ const UserOrderDetails = ({orderDetails}) => {
 
             <div className="m-5 progressbar-container">
                 {
-                    orderDetails?.status.toLowerCase() !== 'failed' &&
+                    orderDetails?.status.toLowerCase() !== 'cancelled' &&
                     <div className="progress ml-5 mr-5 mb-4" style={{height: '4px'}}>
                         <div className="progress-bar" role="progressbar" style={{width: barWidth, backgroundColor:'rgb(0, 158, 127)'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -128,7 +128,7 @@ const UserOrderDetails = ({orderDetails}) => {
                     }
 
                     {
-                        orderDetails?.status.toLowerCase() === "failed" &&
+                        orderDetails?.status.toLowerCase() === "cancelled" &&
                         <>
                             <div className="text-center">
                                 <ImCross color="red" size={20}></ImCross>
@@ -139,13 +139,13 @@ const UserOrderDetails = ({orderDetails}) => {
                     
                 </div>
                 {
-                    orderDetails?.status.toLowerCase() === 'failed' &&
+                    orderDetails?.status.toLowerCase() === 'cancelled' &&
                     <h4 className="text-center mt-3">
-                        Delivery Failed
+                        Delivery cancelled
                     </h4>
                 }
                 {
-                    orderDetails?.status.toLowerCase() !== 'failed' &&
+                    orderDetails?.status.toLowerCase() !== 'cancelled' &&
                     <div className="d-flex order-status-text justify-content-between mt-3">
                         <p>Order Received</p>
                         <p>Order on the way</p>

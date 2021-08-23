@@ -184,8 +184,6 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
         const category = categories.find(item => Number(item.id) === categoryId)
         setSubCategories(category.subCategory)
     }
-
-    console.log(product)
     
     return (
         <div>

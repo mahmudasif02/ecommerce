@@ -250,20 +250,29 @@ const AdminProducts = () => {
         }
         else if(e.which === 13){
             setSearch(e.target.value)
-            apiURL = 'https://pickbazar-clone.herokuapp.com/products/'+e.target.value
-            setSearchLoading(true)
-            fetch(apiURL)
-            .then(res => res.json())
-            .then(result =>{
-                setSearchLoading(false)
-                let newList = result
-                setCategoryFilter("")
-                setPriceFilter("")
-                // setCategoryFilterState("")
-                // setPriceFilterState("")
-                setProducts(newList)
+            let newList = allproducts.slice()
+            const word = e.target.value
+            newList = newList.filter(item => {
+                const arr = item.name.toLowerCase().split(" ")
+                const match = arr.find(item2 => item2 === word.toLowerCase() || item2.startsWith(word))
+                return match ? true : false
             })
-            resetSelection()
+            setProducts(newList)
+
+            // apiURL = 'https://pickbazar-clone.herokuapp.com/products/'+e.target.value
+            // setSearchLoading(true)
+            // fetch(apiURL)
+            // .then(res => res.json())
+            // .then(result =>{
+            //     setSearchLoading(false)
+            //     let newList = result
+            //     setCategoryFilter("")
+            //     setPriceFilter("")
+            //     setCategoryFilterState("")
+            //     setPriceFilterState("")
+            //     setProducts(newList)
+            // })
+            // resetSelection()
         }
     }
     

@@ -78,58 +78,58 @@ const Checkout = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const updateProduct = async (items) => {
-        items = items.map(item=> {
-            return {
-                id: item.id,
-                quantity: item.quantity-item.count
-            }
-        })
-        items.map(async item => {
-            await fetch('https://pickbazar-clone.herokuapp.com/updateProductQuantity', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(item)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data){
-                }
-            })
-            .catch(error => {
-                alert(error.message)
-            })
-        })
-    }
+    // const updateProduct = async (items) => {
+    //     items = items.map(item=> {
+    //         return {
+    //             id: item.id,
+    //             quantity: item.quantity-item.count
+    //         }
+    //     })
+    //     items.map(async item => {
+    //         await fetch('https://pickbazar-clone.herokuapp.com/updateProductQuantity', {
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(item)
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if(data){
+    //             }
+    //         })
+    //         .catch(error => {
+    //             alert(error.message)
+    //         })
+    //     })
+    // }
 
-    const updateCustomerData = async () =>{
-        await fetch('https://pickbazar-clone.herokuapp.com/customer/'+loggedInUser.uid,{
-            headers: {
-                'Content-Type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(async result => {
-            const currentAmount = result[0].totalAmount || 0
-            const currentOrder = result[0].orders || 0
-            const totalAmount = currentAmount + totalPrice - discount
-            const orders = currentOrder + 1
-            await fetch('https://pickbazar-clone.herokuapp.com/updateCustomerOrder/'+loggedInUser.uid,{
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify({totalAmount:totalAmount, orders:orders})
-            })
-        })
-        .catch(e => {
-            alert(e.message)
-        })
-    }
+    // const updateCustomerData = async () =>{
+    //     await fetch('https://pickbazar-clone.herokuapp.com/customer/'+loggedInUser.uid,{
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             authorization: `Bearer ${localStorage.getItem('token')}`
+    //         }
+    //     })
+    //     .then(res => res.json())
+    //     .then(async result => {
+    //         const currentAmount = result[0].totalAmount || 0
+    //         const currentOrder = result[0].orders || 0
+    //         const totalAmount = currentAmount + totalPrice - discount
+    //         const orders = currentOrder + 1
+    //         await fetch('https://pickbazar-clone.herokuapp.com/updateCustomerOrder/'+loggedInUser.uid,{
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 authorization: `Bearer ${localStorage.getItem('token')}`
+    //             },
+    //             body: JSON.stringify({totalAmount:totalAmount, orders:orders})
+    //         })
+    //     })
+    //     .catch(e => {
+    //         alert(e.message)
+    //     })
+    // }
     
     const onSubmit = async data => {
         if(data.paymentMethod === 'card'){

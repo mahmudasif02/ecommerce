@@ -30,7 +30,7 @@ const UserOrderAccordion = ({order,index}) => {
         textColor = "rgb(0, 197, 141)"
         bgColor = "rgb(0, 197, 141, 0.1)"
     }
-    else if(order.status.toLowerCase() === "failed"){
+    else if(order.status.toLowerCase() === "cancelled"){
         textColor = "rgb(252, 92, 99)"
         bgColor = "rgb(252, 92, 99, 0.1)"
     }
@@ -136,7 +136,7 @@ const UserOrderAccordion = ({order,index}) => {
 
                     <div className="m-5 progressbar-container">
                         {
-                            order.status.toLowerCase() !== 'failed' &&
+                            order.status.toLowerCase() !== 'cancelled' &&
                             <div className="progress vertical">
                                 <div className="bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{height: barWidth, width:'100%', backgroundColor:'rgb(0, 158, 127)'}}>
                                 </div>
@@ -189,7 +189,7 @@ const UserOrderAccordion = ({order,index}) => {
                             }
 
                             {
-                                order.status.toLowerCase() !== 'failed' &&
+                                order.status.toLowerCase() !== 'cancelled' &&
                                 <div className="d-flex accordion-order-status-text justify-content-between mt-3">
                                     <p>Order Received</p>
                                     <p>Order on the way</p>
@@ -198,7 +198,7 @@ const UserOrderAccordion = ({order,index}) => {
                             }
 
                             {
-                                order.status.toLowerCase() === "failed" &&
+                                order.status.toLowerCase() === "cancelled" &&
                                 <>
                                     <div className="text-center">
                                         <ImCross color="red" size={20}></ImCross>
@@ -209,9 +209,9 @@ const UserOrderAccordion = ({order,index}) => {
                             
                         </div>
                         {
-                            order.status.toLowerCase() === 'failed' &&
+                            order.status.toLowerCase() === 'cancelled' &&
                             <h4 className="text-center mt-3">
-                                Delivery Failed
+                                Delivery cancelled
                             </h4>
                         }
                     </div>

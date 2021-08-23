@@ -14,6 +14,8 @@ import { AiFillFileImage } from "react-icons/ai";
 import SliderDrawer from './SliderDrawer';
 import Loading from '../../../Loading/Loading';
 import { useItem } from '../../../../contexts/ItemContext';
+import { useEffect } from 'react';
+import { deleteSlider, getSlider } from '../../../../utils/network';
 
 const Settings = () => {
 
@@ -52,10 +54,28 @@ const Settings = () => {
 
     const {handleProductDrawerOpen} = useProductDrawer()
 
+    const [sliderImages, setSliderImages] = useState([])
+    const [sliderLoading, setSliderLoading] = useState()
+    const [sliderChange, setSliderChange] = useState(true)
+
     
+    
+    useEffect(() => {
+        setSliderLoading(true)
+        getSlider()
+        .then(result => {
+            console.log(result)
+            setSliderImages(result)
+            setSliderLoading(false)
+        })
+        .catch(e => {
+            setSliderLoading(false)
+        })
+    }, [sliderChange])
 
     return (
         <AdminLayout>
+            <Loading loading={sliderLoading} />
             <Loading loading={loading} />
             <div className="settings w-100 mt-3">
                 <div className="row">
@@ -123,7 +143,7 @@ const Settings = () => {
             </div>
             <CategoryDrawer isCategoryDrawerOpen={isCategoryDrawerOpen} handleCategoryDrawerClose={handleCategoryDrawerClose}></CategoryDrawer>
             <LogoDrawer isLogoDrawerOpen={isLogoDrawerOpen} handleLogoDrawerClose={handleLogoDrawerClose} setLoading={setLoading} />
-            <SliderDrawer isSliderDrawerOpen={isSliderDrawerOpen} handleSliderDrawerClose={handleSliderDrawerClose} />
+            <SliderDrawer setSliderLoading={setSliderLoading} isSliderDrawerOpen={isSliderDrawerOpen} handleSliderDrawerClose={handleSliderDrawerClose} currentImages={sliderImages} setSliderChange={setSliderChange} />
             {/* <CouponDrawer isCouponDrawerOpen={isCouponDrawerOpen} handleCouponDrawerClose={handleCouponDrawerClose}></CouponDrawer> */}
         </AdminLayout>
     );

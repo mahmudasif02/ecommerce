@@ -44,7 +44,8 @@ const ContactSection = ({register,errors, customer}) => {
             
             callAddContact(number, user.token)
             .then(result => {
-                setLoading(false)
+                window.location.reload();
+                // setLoading(false)
             })
         }
     }

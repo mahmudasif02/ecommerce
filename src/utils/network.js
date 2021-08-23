@@ -25,6 +25,8 @@ export const deleteNumber="/api/frontEnd/deleteContact"
 
 export const addOrderApi="/api/frontEnd/addOrder"
 export const getUserOrderApi="/api/frontEnd/orders"
+export const adminOrdersApi="/api/admin/orders"
+export const updateOrderApi="/api/admin/updateOrder"
 
 export const inputCommentApi="/api/frontEnd/inputCustomerFeedback"
 export const getCommentApi="/api/frontEnd/getFeedbackList/"
@@ -357,6 +359,36 @@ export const getUserOrders = (token) => {
     .catch(e => alert(e.message))
 }
 
+export const getAdminOrders = (token) => {
+    return fetch(base_url+adminOrdersApi,{
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        }
+    })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const updateOrder = (data, token) => {
+    return fetch(base_url+updateOrderApi,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
 export const inputComment = (data, token) => {
     return fetch(base_url+inputCommentApi,{
         method: 'POST',
@@ -408,7 +440,6 @@ export const getLogo = () => {
 }
 
 export const addSlider = (data, token) => {
-    console.log(data)
     return fetch(base_url+addSliderApi,{
         method: 'POST',
         headers: {
@@ -426,10 +457,10 @@ export const addSlider = (data, token) => {
 export const getSlider = () => {
     return fetch(base_url+getSlidersApi)
     .then(res => res.json())
-    .then(async result => {
+    .then( result => {
         return result
     })
-    .catch(e => alert(e.message))
+    // .catch(e => alert(e.message))
 }
 
 export const deleteSlider = (id,token) => {

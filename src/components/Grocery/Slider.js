@@ -3,8 +3,20 @@ import slider1 from '../../img/slider-1.jpg';
 import slider2 from '../../img/slider-2.jpg';
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import "./Slider.css";
+import { useEffect } from 'react';
+import { getSlider } from '../../utils/network';
+import { useState } from 'react';
 
 const Slider = () => {
+
+    const [images, setImages] = useState([])
+    useEffect(() => {
+        getSlider()
+        .then(result => {
+            setImages(result)
+        }
+    })
+
     return (
         <div id="carouselControls" className="carousel slide p-1" data-ride="carousel">
             <div className="carousel-inner">

@@ -41,7 +41,8 @@ const AddressSection = ({register,errors, customer}) => {
             
             callAddAddress(address, user.token)
             .then(result => {
-                setLoading(false)
+                // setLoading(false)
+                window.location.reload();
             })
             // fetch(base_url+'/api/frontEnd/inputAddress', {
             //     method: 'POST',

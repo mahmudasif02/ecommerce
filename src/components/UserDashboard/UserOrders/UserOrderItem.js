@@ -22,7 +22,7 @@ const UserOrderItem = ({order,index, setOrderDetails}) => {
         textColor = "rgb(0, 197, 141)"
         bgColor = "rgb(0, 197, 141, 0.1)"
     }
-    else if(order.status.toLowerCase() === "failed"){
+    else if(order.status.toLowerCase() === "cancelled"){
         textColor = "rgb(252, 92, 99)"
         bgColor = "rgb(252, 92, 99, 0.1)"
     }

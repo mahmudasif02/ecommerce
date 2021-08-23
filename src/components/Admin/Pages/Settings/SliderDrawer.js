@@ -4,18 +4,41 @@ import { useForm } from "react-hook-form";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 import Drawer from '@material-ui/core/Drawer';
+import { addSlider, deleteSlider } from '../../../../utils/network';
+import { IoTrashOutline } from 'react-icons/io5';
 
-const SliderDrawer = ({isSliderDrawerOpen, handleSliderDrawerClose, currentImages}) => {
+const SliderDrawer = ({ setSliderLoading, isSliderDrawerOpen, handleSliderDrawerClose, currentImages, setSliderChange}) => {
+    
+    const handleSliderImageDelete = (id) =>{
+        setSliderLoading(true)
+        const user = JSON.parse(localStorage.getItem('user')) 
+        deleteSlider(id, user.token)
+        .then(result => {
+            console.log(result)
+            setSliderChange(false)
+            setSliderChange(true)
+            setSliderLoading(false)
+            closeDrawer()
+        })
+        .catch(e => {
+            setSliderLoading(false)
+        })
+    }
 
     const { handleSubmit, reset } = useForm();
     const onSubmit = data => {
         if(files.length > 0){
+            setSliderLoading(true)
             const user = JSON.parse(localStorage.getItem('user'))
-            // addLogo(files[0], user.token)
-            // .then(result => {
-            //     console.log(result)
-            //     // closeDrawer()
-            // })
+            const formData = new FormData()
+            formData.append('file', files[0])
+            addSlider(formData, user.token)
+            .then(result => {
+                setSliderChange(true)
+                setSliderChange(false)
+                setSliderLoading(false)
+                closeDrawer()
+            })
         }
         else{
             alert("Please upload an image")
@@ -80,7 +103,17 @@ const SliderDrawer = ({isSliderDrawerOpen, handleSliderDrawerClose, currentImage
                                             currentImages && files.length === 0 &&
                                             <div className="dropzone-img-container">
                                                 {   
-                                                currentImages?.img.map((pic,index) => <img key={index} src={pic} alt="preview" />)
+                                                    currentImages?.map((pic,index) => {
+                                                        return(
+                                                            <span className="admin-slider-preview">
+                                                                <img key={index} src={pic.img} alt="preview" />
+                                                                <div className="slider-image-delete hover-pointer" onClick={() => handleSliderImageDelete(pic.id)}>
+                                                                    <IoTrashOutline color="red" />
+                                                                </div>
+                                                                
+                                                            </span>
+                                                        )
+                                                    })
                                                 }
                                                 
                                             </div>
@@ -88,6 +121,9 @@ const SliderDrawer = ({isSliderDrawerOpen, handleSliderDrawerClose, currentImage
                                         {
                                             images.length > 0 && 
                                             <div className="dropzone-img-container">
+                                                {   
+                                                currentImages?.map((pic,index) => <img className="admin-slider-preview" key={index} src={pic.img} alt="preview" />)
+                                                }
                                                 {images}
                                             </div>
                                         }
