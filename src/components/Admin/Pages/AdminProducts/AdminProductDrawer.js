@@ -179,14 +179,19 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
     });
 
     
-    let defaultSub = []
+    let currentSubCatList = []
     if(product){
         const categoryId = Number(product.category_id)
         const category = categories.find(item => Number(item.id) === categoryId)
-        console.log(category, categoryId)
-        defaultSub = category?.subCategory
+        currentSubCatList = category?.subCategory
     }
-    const [subCategories, setSubCategories] = useState(defaultSub)
+    
+    const [subCategories, setSubCategories] = useState(currentSubCatList)
+
+    useEffect(() => {
+        setSubCategories(currentSubCatList)
+    }, [isProductDrawerOpen])
+
     const handleCategoryChange = (value) => {
         const categoryId = Number(value)
         const category = categories.find(item => Number(item.id) === categoryId)
@@ -370,7 +375,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                             name="sub_category_id" 
                                             id="sub_category_id" 
                                             aria-describedby="sub_category_id" 
-                                            defaultValue={product?.sub_category_id ? product.sub_category_id : "" } 
+                                            defaultValue={product?.sub_category_id} 
                                         >
                                             <option value="" disabled></option>
                                             {
