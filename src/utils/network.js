@@ -38,11 +38,14 @@ export const getSlidersApi="/api/frontEnd/homeSliders"
 export const deleteSliderApi="/api/admin/deleteSlider/"
 export const addSliderApi="/api/admin/addSlider"
 
+export const customerApi="/api/admin/customers"
+
 
 export const getProducts = (selectedCategory="", subCategory="", priceFilter="") => {
     return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory+'&priceFilter='+priceFilter)
     .then(res => res.json())
     .then(result =>{
+        console.log(result)
         return result
     })
 }
@@ -466,6 +469,19 @@ export const getSlider = () => {
 export const deleteSlider = (id,token) => {
     return fetch(base_url+deleteSliderApi+id,{
         method: 'DELETE',
+        headers: {
+            Authorization: token
+        }
+    })
+    .then(res => res.json())
+    .then(async result => {
+        return result
+    })
+    .catch(e => alert(e.message))
+}
+
+export const getCustomers = (token) => {
+    return fetch(base_url+customerApi,{
         headers: {
             Authorization: token
         }
