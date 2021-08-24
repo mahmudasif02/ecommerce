@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
 import { auth } from '../utils/firbaseConfig';
 import { useForceUpdate } from '../components/Admin/Pages/AdminProducts/AdminProducts';
 
@@ -14,25 +14,25 @@ export function AuthProvider({children}) {
     const [loggedInUser, setLoggedInUser] = useState();
     const [loading, setLoading] = useState(true);
 
-    async function loginWith(media){
-        let provider;
-        if(media === 'google')
-            provider = new firebase.auth.GoogleAuthProvider();
-        else if(media === 'facebook')
-            provider = new firebase.auth.FacebookAuthProvider();
-        const data = await auth.signInWithPopup(provider).catch(e=> alert(e.message))
-        if(data && data.additionalUserInfo.isNewUser){
-            await saveUserData(data.user)
-        }
-        return data;
-    }
+    // async function loginWith(media){
+    //     let provider;
+    //     if(media === 'google')
+    //         provider = new firebase.auth.GoogleAuthProvider();
+    //     else if(media === 'facebook')
+    //         provider = new firebase.auth.FacebookAuthProvider();
+    //     const data = await auth.signInWithPopup(provider).catch(e=> alert(e.message))
+    //     if(data && data.additionalUserInfo.isNewUser){
+    //         await saveUserData(data.user)
+    //     }
+    //     return data;
+    // }
 
-    async function signUpWithEmail(userData){
-        await auth.createUserWithEmailAndPassword(userData.email, userData.password).catch(e=>alert(e.message))
-        var user = firebase.auth().currentUser;
-        await saveUserData(user)
-        return user
-    }
+    // async function signUpWithEmail(userData){
+    //     await auth.createUserWithEmailAndPassword(userData.email, userData.password).catch(e=>alert(e.message))
+    //     var user = firebase.auth().currentUser;
+    //     await saveUserData(user)
+    //     return user
+    // }
 
     async function passwordReset(email){
         await auth.sendPasswordResetEmail(email)
@@ -68,14 +68,14 @@ export function AuthProvider({children}) {
         forceUpdate()
     }
 
-    function saveToken(){
-        return firebase.auth().currentUser.getIdToken(true)
-            .then(function(idToken) {
-            return idToken;
-        }).catch(function(error) {
-            alert(error.message);
-        });
-    }
+    // function saveToken(){
+    //     return firebase.auth().currentUser.getIdToken(true)
+    //         .then(function(idToken) {
+    //         return idToken;
+    //     }).catch(function(error) {
+    //         alert(error.message);
+    //     });
+    // }
 
     const saveUserData = (user) =>{
         var dayjs = require('dayjs')
@@ -130,7 +130,7 @@ export function AuthProvider({children}) {
     },[])
 
     const value = {
-        loggedInUser,loginWith,logout, signInWithEmail, signUpWithEmail, saveToken, passwordReset, verifyEmail,
+        loggedInUser,logout, signInWithEmail, passwordReset, verifyEmail,
     }
 
     return (
