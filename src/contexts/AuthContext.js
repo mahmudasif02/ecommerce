@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 // import firebase from "firebase/app";
-import { auth } from '../utils/firbaseConfig';
+// import { auth } from '../utils/firbaseConfig';
 import { useForceUpdate } from '../components/Admin/Pages/AdminProducts/AdminProducts';
 
 const AuthContext = createContext();
@@ -34,25 +34,26 @@ export function AuthProvider({children}) {
     //     return user
     // }
 
-    async function passwordReset(email){
-        await auth.sendPasswordResetEmail(email)
-        .then(() => {
-            alert("An email has been sent to "+ email + " to reset your password. Please check your email")
-        })
-        .catch((error) => {
-            alert(error.message);
-        });
-    }
+    // async function passwordReset(email){
+    //     await auth.sendPasswordResetEmail(email)
+    //     .then(() => {
+    //         alert("An email has been sent to "+ email + " to reset your password. Please check your email")
+    //     })
+    //     .catch((error) => {
+    //         alert(error.message);
+    //     });
+    // }
 
-    async function verifyEmail(){
-        await auth.currentUser.sendEmailVerification()
-        .then(() => {
-            alert("An email containing the verification link has been sent to your email. Please refresh the page after verification")
-        })
-        .catch(e => alert(e.message))
-    }
+    // async function verifyEmail(){
+    //     await auth.currentUser.sendEmailVerification()
+    //     .then(() => {
+    //         alert("An email containing the verification link has been sent to your email. Please refresh the page after verification")
+    //     })
+    //     .catch(e => alert(e.message))
+    // }
 
     function signInWithEmail(user){
+        console.log(user)
         let currentUser = {
             uid: user.userInfo.uid,
             name: user.userInfo.name,
@@ -77,38 +78,38 @@ export function AuthProvider({children}) {
     //     });
     // }
 
-    const saveUserData = (user) =>{
-        var dayjs = require('dayjs')
-        var localizedFormat = require('dayjs/plugin/localizedFormat')
-        dayjs.extend(localizedFormat)
-        let currentUser = {
-            uid: user.userInfo.uid,
-            name: user.userInfo.name,
-            email: user.userInfo.email,
-            // photo: user.photoURL,
-            joiningDate: dayjs().format('LL'),
-            totalAmount: 0,
-            orders: 0 
-        }
+    // const saveUserData = (user) =>{
+    //     var dayjs = require('dayjs')
+    //     var localizedFormat = require('dayjs/plugin/localizedFormat')
+    //     dayjs.extend(localizedFormat)
+    //     let currentUser = {
+    //         uid: user.userInfo.uid,
+    //         name: user.userInfo.name,
+    //         email: user.userInfo.email,
+    //         // photo: user.photoURL,
+    //         joiningDate: dayjs().format('LL'),
+    //         totalAmount: 0,
+    //         orders: 0 
+    //     }
         
-        return fetch('https://pickbazar-clone.herokuapp.com/addCustomer/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(currentUser)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data){ 
-            }
-            setLoading(false)
-        })
-        .catch(error => {
-            setLoading(false)
-            alert(error.message)
-        })
-    }
+    //     return fetch('https://pickbazar-clone.herokuapp.com/addCustomer/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(currentUser)
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         if(data){ 
+    //         }
+    //         setLoading(false)
+    //     })
+    //     .catch(error => {
+    //         setLoading(false)
+    //         alert(error.message)
+    //     })
+    // }
 
     useEffect(() => {
         let currentUser;
@@ -130,7 +131,7 @@ export function AuthProvider({children}) {
     },[])
 
     const value = {
-        loggedInUser,logout, signInWithEmail, passwordReset, verifyEmail,
+        loggedInUser,logout, signInWithEmail,
     }
 
     return (

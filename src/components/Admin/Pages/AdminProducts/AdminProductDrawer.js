@@ -10,6 +10,7 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import tags from '../../../../data/tags';
 import { useItem } from '../../../../contexts/ItemContext';
 import { addProduct, updateProduct } from '../../../../utils/network';
+import { useEffect } from 'react';
 
 const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerOpen}) => {
 
@@ -75,7 +76,6 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
             });
         }
         
-        console.log(images)
         const user = JSON.parse(localStorage.getItem('user')) 
         if(!product){
             addProduct(formData, user.token)
@@ -177,10 +177,18 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
             </li>
         ) 
     });
+
     
-    const [subCategories, setSubCategories] = useState([])
-    const handleCategoryChange = (e) => {
-        const categoryId = Number(e.target.value)
+    let defaultSub = []
+    if(product){
+        const categoryId = Number(product.category_id)
+        const category = categories.find(item => Number(item.id) === categoryId)
+        console.log(category, categoryId)
+        defaultSub = category?.subCategory
+    }
+    const [subCategories, setSubCategories] = useState(defaultSub)
+    const handleCategoryChange = (value) => {
+        const categoryId = Number(value)
         const category = categories.find(item => Number(item.id) === categoryId)
         setSubCategories(category.subCategory)
     }
@@ -345,7 +353,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                             name="category_id" 
                                             id="category_id" 
                                             aria-describedby="category_id" 
-                                            onChange={handleCategoryChange}
+                                            onChange={(e)=>handleCategoryChange(e.target.value)}
                                             defaultValue={product?.category_id} 
                                             required
                                         >
@@ -366,7 +374,7 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                                         >
                                             <option value="" disabled></option>
                                             {
-                                                subCategories.map((subcategory,index) => <option key={index} value={subcategory.id}>{subcategory.name}</option>)
+                                                subCategories?.map((subcategory,index) => <option key={index} value={subcategory.id}>{subcategory.name}</option>)
                                             }
                                         </select>
                                     </div>

@@ -45,7 +45,6 @@ export const getProducts = (selectedCategory="", subCategory="", priceFilter="")
     return fetch(base_url+allProducstApi+'?categoryId='+selectedCategory+'&subCategoryId='+subCategory+'&priceFilter='+priceFilter)
     .then(res => res.json())
     .then(result =>{
-        console.log(result)
         return result
     })
 }
