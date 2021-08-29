@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { BsCheck } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import { useItem } from '../../../contexts/ItemContext';
@@ -18,22 +16,8 @@ const UserOrderDetails = ({orderDetails}) => {
         barWidth = "100%"
     }
 
-    const {allproducts, loading} = useItem()
-    // const [orderedProducts, setOrderedProducts] = useState()
-
-    // useEffect(() => {
-    //     setOrderedProducts(allproducts.filter(pd => {
-    //         let exists = orderDetails?.products.find(pd2 => {
-    //             if(pd.id === pd2.id){
-    //                 pd.count = pd2.count
-    //                 return pd
-    //             }
-    //             else 
-    //                 return null
-    //         })
-    //         return exists? true : false
-    //     }))
-    // }, [allproducts, orderDetails?.products])
+    const { loading} = useItem()
+   
     return (
         <div className="user-order-details border bg-white">
             <Loading loading={loading}></Loading>

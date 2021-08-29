@@ -32,18 +32,6 @@ const UserOrderItem = ({order,index, setOrderDetails}) => {
         background: bgColor
     }
     
-    // let deliveryDate;
-    // if(order.deliverySchedule === '90 min express delivery'){
-    //     deliveryDate = order.deliverySchedule
-    // }
-    // else{
-    //     var dayjs = require('dayjs')
-    //     var localizedFormat = require('dayjs/plugin/localizedFormat')
-    //     dayjs.extend(localizedFormat)
-    //     let newDate = new Date(order.orderDate)
-    //     newDate.setDate(newDate.getDate() + 7)
-    //     deliveryDate = dayjs(newDate).format('LL')
-    // }
 
     const dayjs = require('dayjs')
     const localizedFormat = require('dayjs/plugin/localizedFormat')

@@ -24,18 +24,6 @@ const Customers = () => {
             setAllcustomers(result)
             setCustomers(result)
         })
-
-        // fetch('https://pickbazar-clone.herokuapp.com/customers')
-        // .then(res => res.json())
-        // .then(result => {
-        //     setLoading(false)
-        //     setAllcustomers(result)
-        //     setCustomers(result)
-        // })
-        // .catch(e => {
-        //     setLoading(false)
-        //     alert(e.message)
-        // })
     },[])
     
     const forceUpdate = useForceUpdate()

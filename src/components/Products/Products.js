@@ -30,12 +30,6 @@ const Products = ({changeCategory, selectedCategory, subCategory}) => {
         setProductArray(result)
       })
       
-      // fetch('https://api.onimamzad.com/api/frontEnd/products?categoryId='+selectedCategory+'&subCategoryId='+subCategory)
-      // .then(res => res.json())
-      // .then(result =>{
-      //   setLoading(false)
-      //   setProductArray(result)
-      // })
     }
     else if(searchQuery){
       setLoading(true)

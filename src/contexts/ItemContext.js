@@ -23,7 +23,7 @@ export function ItemContextProvider({children}){
     const [allcategories, setAllCategories] = useState([])
     const [categories, setCategories] = useState([])
 
-    const [allcoupons, setAllcoupons] = useState([])
+    // const [allcoupons, setAllcoupons] = useState([])
     const [coupons, setCoupons] = useState([])
 
     const [logo, setLogo] = useState({})
@@ -36,17 +36,6 @@ export function ItemContextProvider({children}){
             setAllProducts(data)
             setLoading(false)
         })
-        
-        // fetch('https://api.onimamzad.com/api/frontEnd/products')
-        // .then(res => res.json())
-        // .then(data => {
-        //     setProducts(data)
-        //     setAllProducts(data)
-        //     setLoading(false)
-        // }).catch(e => {
-        //     setLoading(false)
-        //     alert(e.message)
-        // })
     },[productChange])
 
     useEffect(() => {
@@ -66,35 +55,10 @@ export function ItemContextProvider({children}){
             setCategories(data)
             setCategoryLoading(false)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/categories')
-        // .then(res => res.json())
-        // .then(data => {
-        //     setAllCategories(data)
-        //     setCategories(data)
-        //     setCategoryLoading(false)
-        // })
-        // .catch(e => {
-        //     setCategoryLoading(false)
-        //     alert(e.message)
-        // })
     },[categoryChange])
 
-    // useEffect(() => {
-    //     setCouponLoading(true)
-    //     fetch('https://pickbazar-clone.herokuapp.com/coupons')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         setAllcoupons(data)
-    //         setCoupons(data)
-    //         setCouponLoading(false)
-    //     }).catch(e => {
-    //         setCouponLoading(false)
-    //         alert(e.message)
-    //     })
-    // },[couponChange])
-
     const value = {
-        loading, setLoading, allproducts, products, setProducts, productChange, setProductChange, categoryChange, setCategoryChange, allcategories, categories, setCategories, categoryLoading, setCategoryLoading, couponLoading, setCouponLoading, allcoupons, coupons, setCoupons, setCouponChange, couponChange, logo, setLogo, logoChange, setLogoChange
+        loading, setLoading, allproducts, products, setProducts, productChange, setProductChange, categoryChange, setCategoryChange, allcategories, categories, setCategories, categoryLoading, setCategoryLoading, couponLoading, setCouponLoading, coupons, setCoupons, setCouponChange, couponChange, logo, setLogo, logoChange, setLogoChange
     }
 
     return (

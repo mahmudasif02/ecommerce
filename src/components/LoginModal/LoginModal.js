@@ -40,20 +40,6 @@ const LoginModal = ({loginIsOpen, handleClose, handleSignupOpen, handleResetOpen
             .catch(e => {
                 alert("Email or password doesn't match")
             })
-            // fetch('https://api.onimamzad.com/api/frontEnd/userLogin', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data)
-            // })
-            // .then(res => res.json())
-            // .then(result => {
-            //     reset()
-            //     signInWithEmail(result)
-            //     handleClose()
-            // })
-            // .catch(e => alert("Email or password doesn't match"))
         }
         catch(e){
             alert(e.message)
@@ -99,7 +85,6 @@ const LoginModal = ({loginIsOpen, handleClose, handleSignupOpen, handleResetOpen
                     </div>
                     <button type="submit" className="btn form-btn continue-btn bg-theme w-100">Continue</button>
                 </form>
-                {/* <SocialLogIn handleClose={handleClose}></SocialLogIn> */}
                 <p className="form-text modal-text text-center">Don't have any account? 
                     <span className="theme-text underline" onClick={handleSignupOpen}> Sign Up</span>
                 </p>

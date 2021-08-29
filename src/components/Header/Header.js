@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import logo from '../../img/logo.svg';
 import {AiOutlineSearch} from 'react-icons/ai';
 import './Header.css';
 import LoginModal from '../LoginModal/LoginModal';

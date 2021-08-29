@@ -26,18 +26,6 @@ const Dashboard = () => {
         })
     }, [])
     
-    // useEffect(() => {
-    //     setLoading(true)
-    //     fetch('https://pickbazar-clone.herokuapp.com/orders')
-    //     .then(res => res.json())
-    //     .then(orders =>{
-    //         fetch('https://pickbazar-clone.herokuapp.com/customers')
-    //         .then(res => res.json())
-    //         .then(customers => {
-    //             calculate(orders, customers)
-    //         })
-    //     })
-    // },[])
 
     const [previousRevenue, setPreviousRevenue] = useState(0)
     const [currentRevenue, setCurrentRevenue] = useState(0)

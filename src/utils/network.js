@@ -462,7 +462,6 @@ export const getSlider = () => {
     .then( result => {
         return result
     })
-    // .catch(e => alert(e.message))
 }
 
 export const deleteSlider = (id,token) => {

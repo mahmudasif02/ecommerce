@@ -95,7 +95,6 @@ const ProductDrawer = () => {
                             </div>
                             <div className="col-lg-8 bg-white product-info">
                                 
-                                {/* <form onSubmit={handleSubmit(onSubmit)}> */}
                                     <div className="form-group">
                                         <label htmlFor="productName">Name</label>
                                         <input type="text" className="form-control" {...register("productName")} name="productName" id="productName" aria-describedby="productName" defaultValue={product?product.name:""} required/>
@@ -139,8 +138,6 @@ const ProductDrawer = () => {
                                             displayValue="name" // Property name to display in the dropdown options
                                         />
                                     </div>
-                                    {/* <button type="submit" className="btn btn-primary">Submit</button> */}
-                                {/* </form> */}
                             </div>
                         </div>
                         

@@ -30,23 +30,6 @@ const Login = () => {
             .catch(e => {
                 alert("Email or password doesn't match")
             })
-            // fetch('https://api.onimamzad.com/api/frontEnd/userLogin', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(data)
-            // })
-            // .then(res => res.json())
-            // .then(result => {
-            //     setLoading(false)
-            //     signInWithEmail(result)
-            //     history.replace(from)
-            // })
-            // .catch(e => {
-            //     setLoading(false)
-            //     alert("Email or password doesn't match")
-            // })
         }
         catch(e){
             setLoading(false)
@@ -89,7 +72,6 @@ const Login = () => {
                                 <button type="submit" className="btn form-btn continue-btn bg-theme w-100">Continue</button>
                             </form>
                             
-                            {/* <UserSocialLogin></UserSocialLogin> */}
                             
                             <p className="form-text modal-text text-center">Don't have any account? <Link className="theme-text underline" to="/signup">Sign Up</Link></p>
                             <div className="forgot-password">

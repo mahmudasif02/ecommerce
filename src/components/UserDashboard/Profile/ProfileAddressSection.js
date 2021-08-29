@@ -12,11 +12,6 @@ const ProfileAddressSection = ({customer}) => {
     const [addAddressIsOpen, setAddAddressIsOpen] = useState(false);
     const [loading, setLoading] = useState(false)
     const [addresses, setAddresses] = useState([])
-    // const {loggedInUser} = useAuth()
-
-    // useEffect(()=> {
-    //     setAddresses(customer?.deliveryAddress || [])
-    // },[customer?.deliveryAddress])
 
     const handleClose = () => {
         setAddAddressIsOpen(false)
@@ -58,25 +53,7 @@ const ProfileAddressSection = ({customer}) => {
             setLoading(false)
         })
         
-        // fetch('https://pickbazar-clone.herokuapp.com/updateCustomerAddress/'+loggedInUser.uid, {
-        //         method: 'PUT',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             authorization: `Bearer ৳{localStorage.getItem('token')}`
-        //         },
-        //         body: JSON.stringify(newList)
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if(data){
-                    
-        //         }
-        //         setLoading(false)
-        //     })
-        //     .catch(error => {
-        //         setLoading(false)
-        //         alert(error.message)
-        //     })
+        
     }
 
     const deleteAddress = (index) => {
@@ -86,24 +63,7 @@ const ProfileAddressSection = ({customer}) => {
         .then(result => {
             setLoading(false)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/deleteAddress'+ addresses[index].id, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: user.token
-        //     }
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if(data){
-                
-        //     }
-        //     setLoading(false)
-        // })
-        // .catch(error => {
-        //     setLoading(false)
-        //     alert(error.message)
-        // })
+        
     }
     
     const handleDelete = (index) =>{
@@ -121,17 +81,7 @@ const ProfileAddressSection = ({customer}) => {
             setLoading(false)
             setAddresses(result)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/deliveryAddress', {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: user.token
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(result => {
-        //     setLoading(false)
-        //     setNumbers(result)
-        // })
+        
     },[])
 
     return (

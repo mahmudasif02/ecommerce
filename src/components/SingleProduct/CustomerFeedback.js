@@ -47,7 +47,7 @@ const CustomerFeedback = ({productId}) => {
                 <div className="input-group mb-3">
                     <input type="text" name="comment" id="comment" className="form-control" placeholder="Your Comment" {...register("comment")} aria-label="user's comment" aria-describedby="comment" required />
                     <div className="input-group-append">
-                        <button className="input-group-text">Upload</button>
+                        <button className="input-group-text">Comment</button>
                     </div>
                 </div>
             </form>

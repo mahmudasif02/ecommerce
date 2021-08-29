@@ -41,28 +41,9 @@ const AddressSection = ({register,errors, customer}) => {
             
             callAddAddress(address, user.token)
             .then(result => {
-                // setLoading(false)
                 window.location.reload();
             })
-            // fetch(base_url+'/api/frontEnd/inputAddress', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         Authorization: user.token
-            //     },
-            //     body: JSON.stringify(address)
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     if(data){
-                    
-            //     }
-            //     setLoading(false)
-            // })
-            // .catch(error => {
-            //     setLoading(false)
-            //     alert(error.message)
-            // })
+            
         }
     }
 
@@ -75,23 +56,7 @@ const AddressSection = ({register,errors, customer}) => {
             setLoading(false)
             setAddresses(result)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/deliveryAddress', {
-        //     method: "GET",
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //         'Authorization': user.token
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(result => {
-        //     setLoading(false)
-        //     setAddresses(result)
-        // })
-        // .catch(e => {
-        //     setLoading(false)
-        //     alert(e.message)
-        // })
+        
     },[])
 
     const updateAddressInDatabase = (title,desc, index) => {
@@ -104,25 +69,7 @@ const AddressSection = ({register,errors, customer}) => {
         .then(result => {
             setLoading(false)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/updateAddress'+ addresses[index].id, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: user.token
-        //     },
-        //     body: JSON.stringify(address)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if(data){
-                
-        //     }
-        //     setLoading(false)
-        // })
-        // .catch(error => {
-        //     setLoading(false)
-        //     alert(error.message)
-        // })
+        
     }
     
     const deleteAddress = (index) => {
@@ -132,24 +79,7 @@ const AddressSection = ({register,errors, customer}) => {
         .then(result => {
             setLoading(false)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/deleteAddress'+ addresses[index].id, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: user.token
-        //     }
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if(data){
-                
-        //     }
-        //     setLoading(false)
-        // })
-        // .catch(error => {
-        //     setLoading(false)
-        //     alert(error.message)
-        // })
+        
     }
     
     const handleDelete = (index) =>{

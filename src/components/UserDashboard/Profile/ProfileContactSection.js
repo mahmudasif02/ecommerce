@@ -13,10 +13,6 @@ const ProfileContactSection = ({customer}) => {
     const [numbers, setNumbers] = useState([])
     const [loading, setLoading] = useState(false)
 
-    // useEffect(()=> {
-    //     setNumbers(customer?.contactNumber || [])
-    // },[customer?.contactNumber])
-
     const handleClose = () => {
         setAddContactIsOpen(false)
     }
@@ -57,17 +53,6 @@ const ProfileContactSection = ({customer}) => {
             setLoading(false)
             setNumbers(result)
         })
-        // fetch('https://api.onimamzad.com/api/frontEnd/deliveryAddress', {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: user.token
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(result => {
-        //     setLoading(false)
-        //     setNumbers(result)
-        // })
     },[])
     
     const updateNumbersInDatabase = (title,desc,index) => {
@@ -80,25 +65,7 @@ const ProfileContactSection = ({customer}) => {
         .then(result => {
             setLoading(false)
         })
-        // fetch('https://pickbazar-clone.herokuapp.com/updateCustomerContact/'+loggedInUser.uid, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         authorization: `Bearer ৳{localStorage.getItem('token')}`
-        //     },
-        //     body: JSON.stringify(newList)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if(data){
-                
-        //     }
-        //     setLoading(false)
-        // })
-        // .catch(error => {
-        //     setLoading(false)
-        //     alert(error.message)
-        // })
+       
     }
 
     const deleteNumber = (index) => {

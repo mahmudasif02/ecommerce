@@ -13,12 +13,6 @@ const GroceryItem = ({product}) => {
     })
 
     const item = items?.cartItems?.find(pd => pd.id === product.id);
-    // const [productAdded, setProductAdded] = useState(false);
-    // const [count, setCount] = useState(0);
-    // const addProduct = () =>{
-    //     setProductAdded(true);
-    //     setCount(1);
-    // }
 
     const handleIncrease = () =>{
         dispatch(increaseCount(product))

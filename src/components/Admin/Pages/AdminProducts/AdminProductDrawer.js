@@ -6,7 +6,6 @@ import './AdminProductDrawer.css'
 import {useDropzone} from 'react-dropzone';
 import { useForm } from "react-hook-form";
 import { Multiselect } from 'multiselect-react-dropdown';
-// import categories from '../../../../data/categories';
 import tags from '../../../../data/tags';
 import { useItem } from '../../../../contexts/ItemContext';
 import { addProduct, updateProduct } from '../../../../utils/network';
@@ -61,8 +60,6 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
         formData.append('category_id',category_id)
         formData.append('sub_category_id',sub_category_id)
         formData.append('quantity',quantity)
-        // images.map(image => formData.append('images',image))
-        // formData.append('tags[]',tags)
 
         if(tags){
             Array.from(tags).forEach(tag => {
@@ -95,64 +92,12 @@ const AdminProductDrawer = ({product, handleProductDrawerClose, isProductDrawerO
                 setLoading(false)
             })
         }
-
-
-        // let apiURL = ""
-        // if(!product){
-        //     apiURL = 'https://pickbazar-clone.herokuapp.com/addproduct'
-        // }
-        // else{
-        //     apiURL = 'https://pickbazar-clone.herokuapp.com/updateProduct/'+product.id
-        // }
-        // fetch(apiURL, {
-        //     method: product? 'PUT' : 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     setLoading(false)
-        //     if(data){
-        //         reset()
-        //         setProductChange(true)
-        //         setProductChange(false)
-        //     }
-        // })
-        // .catch(error => {
-        //     setLoading(false)
-        //     alert(error.message)
-        // })
     }
     
     const onSubmit = data => {
         setLoading(true)
         data.tags = selectedValues
         if(files.length > 0){
-            // const imageData = new FormData();
-            // imageData.set('key', '0c9c52f3c2c70e376333024c7dd177e2');
-            // const promises = []
-            // const imageURLs = []
-            // files.map((file) => {
-            //     imageData.append('image', file);
-            //     promises.push(fetch('https://api.imgbb.com/1/upload', {
-            //         method: 'POST',
-            //         body: imageData
-            //     }))
-            //     return 0
-            // })
-            // Promise.all(promises)
-            // .then(responses =>
-            // Promise.all(responses.map(response => response.json()))
-            // ).then(result =>{
-            //     result.map(item=> imageURLs.push(item.data.display_url))
-            //     data.img = imageURLs
-            //     saveToDatabase(data)
-            // }).catch(err =>
-            //     alert(err.message)
-            // );
-
             data.images = files
             saveToDatabase(data, product?.id)
             

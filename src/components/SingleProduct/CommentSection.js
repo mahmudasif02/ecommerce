@@ -9,9 +9,6 @@ const CommentSection = ({ comments}) => {
 
     const handleCollapse = () => {
         setIsCollapsed(!isCollapsed)
-        // if(!isCollapsed){
-        //     window.scroll(0,0)
-        // }
     }
 
     return (

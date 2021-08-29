@@ -23,17 +23,6 @@ const Orders = () => {
             setOrders(result)
             setLoading(false)
         })
-        // fetch('https://pickbazar-clone.herokuapp.com/orders')
-        // .then(res => res.json())
-        // .then(result => {
-        //     setAllOrders(result)
-        //     setOrders(result)
-        //     setLoading(false)
-        // })
-        // .catch(e => {
-        //     setLoading(false)
-        //     alert(e.message)
-        // })
     },[])
 
     const sortByDate = (orderList) => {

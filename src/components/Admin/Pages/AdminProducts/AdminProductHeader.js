@@ -19,7 +19,6 @@ const AdminProductHeader = ({forceUpdate,setProducts, productFilter, handleSearc
             setProducts(result)
             forceUpdate()
         })
-        // productFilter(e.target.value, priceFilter , true)
     }
     const handlePrice = (e) =>{ 
         setPriceFilter(e.target.value)
@@ -28,7 +27,6 @@ const AdminProductHeader = ({forceUpdate,setProducts, productFilter, handleSearc
             setProducts(result)
             forceUpdate()
         })
-        // productFilter(categoryFilter, e.target.value, true)
     }
 
     return (

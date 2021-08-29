@@ -45,23 +45,6 @@ const OrderItem = ({order}) => {
             console.log(result)
         })
 
-        // fetch('https://pickbazar-clone.herokuapp.com/updateOrderStatus/'+order.id, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(order)
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     if(data){ 
-        //     }
-        //     setLoading(false)
-        // })
-        // .catch(error => {
-        //     setLoading(false)
-        //     alert(error.message)
-        // })
     }
 
     var dayjs = require('dayjs')
