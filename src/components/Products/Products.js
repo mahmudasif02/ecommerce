@@ -20,6 +20,7 @@ const Products = ({changeCategory, selectedCategory, subCategory}) => {
   useEffect(() => {
     setProductArray(allproducts)
   },[allproducts])
+  console.log(allproducts)
 
   useEffect(() => {
     if(selectedCategory){
@@ -33,12 +34,20 @@ const Products = ({changeCategory, selectedCategory, subCategory}) => {
     }
     else if(searchQuery){
       setLoading(true)
-      fetch('https://pickbazar-clone.herokuapp.com/products/'+searchQuery)
-      .then(res => res.json())
-      .then(result =>{
-        setLoading(false)
-        setProductArray(result)
+      const query = searchQuery.toLowerCase()
+      const newList = allproducts.filter(item => {
+        if(item.name.toLowerCase().includes(query) || item.desc.includes(query)){
+          return item
+        }
       })
+      setProductArray(newList)
+      setLoading(false)
+      // fetch('https://pickbazar-clone.herokuapp.com/products/'+searchQuery)
+      // .then(res => res.json())
+      // .then(result =>{
+      //   setLoading(false)
+      //   setProductArray(result)
+      // })
     }
     else{
       setProductArray(allproducts)

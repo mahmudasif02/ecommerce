@@ -18,69 +18,69 @@ const AdminHeader = ({setSidebarOpen}) => {
 
     const {logo} = useItem()
 
-    const [notifications, setNotifications] = useState([])
-    const [unreadNotifications, setUnreadNotifications] = useState(0)
-    useEffect(() => {
-        fetch('https://pickbazar-clone.herokuapp.com/notifications')
-        .then(res => res.json())
-        .then(result =>{
-            calculateUnread(result)
-            setNotifications(result)
-        })
-    }, [])
+    // const [notifications, setNotifications] = useState([])
+    // const [unreadNotifications, setUnreadNotifications] = useState(0)
+    // useEffect(() => {
+    //     fetch('https://pickbazar-clone.herokuapp.com/notifications')
+    //     .then(res => res.json())
+    //     .then(result =>{
+    //         calculateUnread(result)
+    //         setNotifications(result)
+    //     })
+    // }, [])
 
-    const calculateUnread = (result) =>{
-        let unread = 0
-        result.map(item => {
-            if(item.unread)
-                unread++
-            return 0
-        })
-        setUnreadNotifications(unread)
-    }
+    // const calculateUnread = (result) =>{
+    //     let unread = 0
+    //     result.map(item => {
+    //         if(item.unread)
+    //             unread++
+    //         return 0
+    //     })
+    //     setUnreadNotifications(unread)
+    // }
 
-    const handleNotificationRead = (e, index) => {
-        if(notifications[index].unread === true){
-            fetch('https://pickbazar-clone.herokuapp.com/updateNotification/'+notifications[index].id,{
-                method: 'PUT'
-            })
-            .then(res=>res.json())
-            .then(result=> result)
-            .catch(e => alert(e.message))
+    // const handleNotificationRead = (e, index) => {
+    //     if(notifications[index].unread === true){
+    //         fetch('https://pickbazar-clone.herokuapp.com/updateNotification/'+notifications[index].id,{
+    //             method: 'PUT'
+    //         })
+    //         .then(res=>res.json())
+    //         .then(result=> result)
+    //         .catch(e => alert(e.message))
 
-            const newList = [...notifications]
-            newList[index].unread = false
-            setNotifications(newList)
-            calculateUnread(newList)
-            e.target.style.background = "white"
-        }
-    }
+    //         const newList = [...notifications]
+    //         newList[index].unread = false
+    //         setNotifications(newList)
+    //         calculateUnread(newList)
+    //         e.target.style.background = "white"
+    //     }
+    // }
 
-    const clearNotifications = () =>{
-        fetch('https://pickbazar-clone.herokuapp.com/deleteNotifications',{
-            method: 'DELETE'
-        })
-        .then(res=>res.json())
-        .then(result=> (result))
-        .catch(e => alert(e.message))
+    // const clearNotifications = () =>{
+    //     fetch('https://pickbazar-clone.herokuapp.com/deleteNotifications',{
+    //         method: 'DELETE'
+    //     })
+    //     .then(res=>res.json())
+    //     .then(result=> (result))
+    //     .catch(e => alert(e.message))
 
-        setNotifications([])
-        setUnreadNotifications(0)
-    }
+    //     setNotifications([])
+    //     setUnreadNotifications(0)
+    // }
 
-    const markAllRead = () =>{
-        fetch('https://pickbazar-clone.herokuapp.com/updateNotifications',{
-            method: 'PUT'
-        })
-        .then(res=>res.json())
-        .then(result=> (result))
-        .catch(e => alert(e.message))
+    // const markAllRead = () =>{
+    //     fetch('https://pickbazar-clone.herokuapp.com/updateNotifications',{
+    //         method: 'PUT'
+    //     })
+    //     .then(res=>res.json())
+    //     .then(result=> (result))
+    //     .catch(e => alert(e.message))
 
-        const newList = [...notifications]
-        newList.map(item => item.unread = false)
-        setNotifications(newList)
-        setUnreadNotifications(0)
-    }
+    //     const newList = [...notifications]
+    //     newList.map(item => item.unread = false)
+    //     setNotifications(newList)
+    //     setUnreadNotifications(0)
+    // }
 
 
 
@@ -99,7 +99,7 @@ const AdminHeader = ({setSidebarOpen}) => {
 
                     <div className="navbar ml-auto" id="navbarSupportedContent">
                         <button className="ml-auto btn add-pd-btn pr-4 pl-4" onClick={()=>handleProductDrawerOpen(null)}>Add Product</button>
-                        <div className="admin-notification">
+                        {/* <div className="admin-notification">
                             {
                                 unreadNotifications > 0 &&
                                 <span className="new-notification"></span>
@@ -134,7 +134,7 @@ const AdminHeader = ({setSidebarOpen}) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="dropdown user-icon hover-pointer">
                             <img className="dropdown-toggle" src={loggedInUser.photo? loggedInUser.photo : user} alt="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">

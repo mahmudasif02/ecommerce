@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {AiOutlineSearch} from 'react-icons/ai';
-import './Header.css';
 import LoginModal from '../LoginModal/LoginModal';
 import SignupModal from '../SignupModal/SignupModal';
 import ResetModal from '../ResetModal/ResetModal';
-import FilterDrawer from './FilterDrawer';
 import { useAuth } from '../../contexts/AuthContext';
 import { AiOutlineAlignLeft } from "react-icons/ai";
-import UserDrawer from './UserDrawer';
 import userIcon from '../../img/user.png';
-import { useEffect } from 'react';
 import { useItem } from '../../contexts/ItemContext';
+import UserDrawer from '../Header/UserDrawer';
 
-const Header = ({changeCategory}) => {
+const SingleProductHeader = () => {
 
     const [loginIsOpen,setLoginIsOpen] = useState(false);
     const [signupIsOpen, setSignupIsOpen] = useState(false);
@@ -47,12 +44,6 @@ const Header = ({changeCategory}) => {
         document.body.style.overflow = 'unset';
     }
 
-    const [isFilterDrawerOpen, setFilterDrawerOpen] = useState(false);
-
-    const handleFilterDrawerClose = () => {
-        setFilterDrawerOpen(false);
-    }
-
     const {loggedInUser, logout} = useAuth()
     
     const [isUserDrawerOpen, setUserDrawerOpen] = useState(false)
@@ -73,6 +64,8 @@ const Header = ({changeCategory}) => {
         history.push('/products/'+searchQuery)
     }
 
+    const [isHome, setIsHome] = useState(false)
+
     
     const {logo} = useItem()
 
@@ -92,6 +85,8 @@ const Header = ({changeCategory}) => {
                         <Link className="navbar-brand d-flex align-items-center" to="/"><img className="site-logo" src={logo} alt="" /></Link>
                     </div>
 
+                    {
+                        isHome &&
                         <AiOutlineSearch 
                             size={25} 
                             className="navbar-toggler" 
@@ -102,15 +97,18 @@ const Header = ({changeCategory}) => {
                             aria-expanded="false" 
                             aria-label="Toggle navigation">
                         </AiOutlineSearch>
+                    }
 
                     <div className={"collapse navbar-collapse"} id="navbarSupportedContent">
-                       
-                        <ul className={"navbar-nav col-lg-8 ml-auto"}>
-                            <form onSubmit={handleSearchSubmit} className="form-inline rounded p-2 w-100">
-                                <AiOutlineSearch size={25} onClick={handleSearchClick} className="hover-pointer"></AiOutlineSearch>
-                                <input className="border-0 ml-1" id="search-bar" type="search" placeholder="Search your products from here" aria-label="Search" />
-                            </form>
-                        </ul>
+                        {
+                            isHome &&
+                            <ul className={"navbar-nav col-lg-8 ml-auto"}>
+                                <form onSubmit={handleSearchSubmit} className="form-inline rounded p-2 w-100">
+                                    <AiOutlineSearch size={25} onClick={handleSearchClick} className="hover-pointer"></AiOutlineSearch>
+                                    <input className="border-0 ml-1" id="search-bar" type="search" placeholder="Search your products from here" aria-label="Search" />
+                                </form>
+                            </ul>
+                        }
                         {
                             !loggedInUser &&
                             <ul className="navbar-nav ml-auto">
@@ -154,11 +152,6 @@ const Header = ({changeCategory}) => {
                     </div>
                 </div>
             </div> */}
-            <FilterDrawer 
-                changeCategory={changeCategory} 
-                isFilterDrawerOpen={isFilterDrawerOpen} 
-                handleFilterDrawerClose={handleFilterDrawerClose}
-            />
             <UserDrawer
                 isUserDrawerOpen={isUserDrawerOpen}
                 handleUserDrawerClose={handleUserDrawerClose}
@@ -170,4 +163,4 @@ const Header = ({changeCategory}) => {
     );
 };
 
-export default Header;
+export default SingleProductHeader;
