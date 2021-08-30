@@ -59,7 +59,7 @@ const SignupModal = ({signupIsOpen, handleClose, handleLoginOpen}) => {
 
             <div className="modal-container">
                 <h4 className="theme-text text-center">Sign Up</h4>
-                <p className="text-center">By signing up, you agree to Pickbazar's Terms</p>
+                <p className="text-center">By signing up, you agree to Ettadiweb's Terms</p>
                 <form className="login" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <input 
@@ -107,7 +107,7 @@ const SignupModal = ({signupIsOpen, handleClose, handleLoginOpen}) => {
                     <button type="submit" className="btn form-btn continue-btn bg-theme w-100">Continue</button>
                 </form>
                 
-                <p className="terms">By signing up, you agree to Pickbazar's <span className="terms-link">Terms &amp; Condtions</span></p>
+                <p className="terms">By signing up, you agree to Ettadiweb's <span className="terms-link">Terms &amp; Condtions</span></p>
                 
                 {/* <SocialLogIn></SocialLogIn> */}
                 

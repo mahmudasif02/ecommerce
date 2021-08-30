@@ -48,7 +48,7 @@ const SignUp = () => {
                     <div className="row">
                         <div className="col-lg-5 mx-auto bg-white p-md-5 pt-4 pb-4 rounded">
                             <h4 className="theme-text text-center">Sign Up</h4>
-                            <p className="text-center">By signing up, you agree to Pickbazar's Terms</p>
+                            <p className="text-center">By signing up, you agree to Ettadiweb's Terms</p>
                             <form className="login" onSubmit={handleSubmit(onSubmit)}>
                                 <div className="form-group">
                                     <input 
@@ -96,7 +96,7 @@ const SignUp = () => {
                                 <button type="submit" className="btn form-btn continue-btn bg-theme w-100">Continue</button>
                             </form>
                             
-                            <p className="terms">By signing up, you agree to Pickbazar's <span className="terms-link">Terms &amp; Condtions</span></p>
+                            <p className="terms">By signing up, you agree to Ettadiweb's <span className="terms-link">Terms &amp; Condtions</span></p>
                             
                             {/* <UserSocialLogin></UserSocialLogin> */}
                             

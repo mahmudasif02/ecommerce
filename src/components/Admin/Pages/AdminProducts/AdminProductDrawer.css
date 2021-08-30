@@ -274,3 +274,38 @@ svg.drawer-close  {
         top: 10px;
     }
 }
+
+
+
+
+@media (min-width: 1400px){
+    .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
+        width: 70%;
+    }
+    
+}
+
+@media (min-width: 1200px) and (max-width: 1399px){
+    .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
+        width: 70%;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1199px){
+    .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
+        width: 70%;
+    }
+    
+}
+
+@media (min-width: 769px) and (max-width: 991px){
+    .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16{
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px){
+    .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
+        width: 100%;
+    }
+}
